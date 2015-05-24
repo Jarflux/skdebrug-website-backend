@@ -1,14 +1,10 @@
 package be.skdebrug.website.health;
 
-import be.skdebrug.website.WebApp;
 import be.skdebrug.website.endpoint.SQLiteConnection;
 import com.codahale.metrics.health.HealthCheck;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Ben Oeyen on 5/10/2015.
