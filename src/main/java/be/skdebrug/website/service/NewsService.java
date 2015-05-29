@@ -1,14 +1,9 @@
 package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.News;
-import be.skdebrug.website.endpoint.SQLiteConnection;
 import be.skdebrug.website.repository.NewsRepository;
 import com.google.inject.Inject;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
