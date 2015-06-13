@@ -12,7 +12,6 @@ import java.sql.Statement;
 public class DatabaseHealthCheck extends HealthCheck {
     @Override
     protected Result check() throws Exception {
-
         String resultString = (new SQLiteConnection<String>() {
             @Override
             public String defineOperation(Statement statement) throws SQLException {
