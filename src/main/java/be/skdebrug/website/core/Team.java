@@ -4,9 +4,9 @@ package be.skdebrug.website.core;
  * Developer: Ben Oeyen
  * Date: 23/07/2015
  */
-public class News {
+public class Team {
     private int id;
-    private String content;
+    private String name;
 
     public int getId() {
         return id;
@@ -16,11 +16,11 @@ public class News {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -9,7 +9,8 @@ import io.dropwizard.Configuration;
 import io.dropwizard.setup.Environment;
 
 /**
- * Created by Ben Oeyen on 6/13/2015.
+ * Developer: Ben Oeyen
+ * Date: 24/05/2015
  */
 public class WebApp extends Application<Configuration> {
 

@@ -7,7 +7,8 @@ import com.google.inject.Inject;
 import java.util.List;
 
 /**
- * Created by Ben on 24/05/15.
+ * Developer: Ben Oeyen
+ * Date: 24/05/2015
  */
 public class NewsService {
 

@@ -11,7 +11,8 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 /**
- * Created by Ben on 24/05/15.
+ * Developer: Ben Oeyen
+ * Date: 24/05/2015
  */
 @Path("/news")
 @Produces(MediaType.APPLICATION_JSON)

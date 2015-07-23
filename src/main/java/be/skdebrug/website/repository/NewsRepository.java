@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ben on 24/05/15.
+ * Developer: Ben Oeyen
+ * Date: 24/05/2015
  */
 public class NewsRepository {
     private static final String TBL_NEWS = "tbl_news";
@@ -67,10 +68,7 @@ public class NewsRepository {
             public News defineOperation(Statement statement) throws SQLException {
                 ResultSet queryResult = statement.executeQuery(log("SELECT * FROM " + TBL_NEWS + " WHERE " + COL_NEWS_ID + " = '" + newsId + "'"));
                 if (queryResult.next()) {
-                    News news = new News();
-                    news.setId(queryResult.getInt(COL_NEWS_ID));
-                    news.setContent(queryResult.getString(COL_NEWS_CONTENT));
-                    return news;
+                    return parseNewsFromResult(queryResult);
                 }
                 return null;
             }

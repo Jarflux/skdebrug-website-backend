@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Created by Ben Oeyen on 5/14/2015.
+ * Developer: Ben Oeyen
+ * Date: 24/05/2015
  */
 public abstract class SQLiteConnection<RESULT> {
 
