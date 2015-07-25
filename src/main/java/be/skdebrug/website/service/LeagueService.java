@@ -14,7 +14,7 @@ import java.util.List;
 public class LeagueService {
 
     @Inject
-    private StandingService standingService;
+    protected GameService gameService;
 
     public League getCurrent() {
         return get(DateTime.now().getYear());
@@ -24,12 +24,7 @@ public class LeagueService {
     public League get(int year){
         League league = new League();
         league.setYear(year);
-
-        for(Standing standing: standingService.getAll(year)) {
-            league.add(standing);
-        }
-
-        league.sort();
+        league.calculateStandings(gameService.readAllLeagueBetweenDates(league.getStartDate(), league.getEndDate()));
         return league;
     }
 }

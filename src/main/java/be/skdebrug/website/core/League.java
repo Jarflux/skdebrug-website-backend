@@ -57,4 +57,33 @@ public class League {
     public void sort(){
         Collections.sort(standings);
     }
+
+    //TODO Test Method
+    public void calculateStandings(List<Game> games) {
+        for(Game game: games){
+            addGameResultToStandings(game);
+        }
+        sort();
+    }
+
+    private void addGameResultToStandings(Game game) {
+        getStandingForTeam(game.getHomeTeam()).addStatisticsFromGame(game);
+        getStandingForTeam(game.getAwayTeam()).addStatisticsFromGame(game);
+    }
+
+    private Standing getStandingForTeam(Team team) {
+        for(Standing standing: standings){
+            if(standing.getTeam().equals(team)){
+                return standing;
+            }
+        }
+        Standing standing = new Standing();
+        standing.setTeam(team);
+        add(standing);
+        return standing;
+    }
+
+    public List<Standing> getStandings() {
+        return standings;
+    }
 }

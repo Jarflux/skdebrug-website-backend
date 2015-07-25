@@ -74,4 +74,6 @@ public class Game {
     public void setAwayScore(Integer awayScore) {
         this.awayScore = awayScore;
     }
+
+
 }
