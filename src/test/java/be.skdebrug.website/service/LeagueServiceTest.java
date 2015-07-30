@@ -4,13 +4,13 @@ import be.skdebrug.website.core.Game;
 import be.skdebrug.website.core.League;
 import be.skdebrug.website.core.Standing;
 import be.skdebrug.website.core.Team;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,6 @@ public class LeagueServiceTest {
 
     @Before
     public void before(){
-
         Injector injector = Guice.createInjector();
         leagueService = new LeagueService();
         injector.injectMembers(leagueService);
@@ -49,13 +48,13 @@ public class LeagueServiceTest {
     }
 
     @Test
-    public void testLeagueCalculation() {
+    public void testLeagueCalculation() throws JsonProcessingException{
         List<Game> games = new ArrayList<>();
         games.add(createGame(teamA, teamB, 1, 0));
         games.add(createGame(teamC, teamD, 2, 0));
         games.add(createGame(teamA, teamC, 3, 0));
         games.add(createGame(teamC, teamB, 4, 0));
-        when(gameService.readAllLeagueBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
+        when(gameService.getAllLeagueBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
         League league = leagueService.get(2012);
         List<Standing> standings = league.getStandings();
         // Team A 2 0 0 4 0 4 6

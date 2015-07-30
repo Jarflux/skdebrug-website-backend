@@ -25,16 +25,16 @@ public class NewsController {
     @GET
     @Timed
     @Path("/{newsId}")
-    public News read(@PathParam("newsId") String newsId) {
-        LOG.debug("@GET /news/" + newsId + " read news with id " + newsId);
-        return newsService.read(newsId);
+    public News get(@PathParam("newsId") int newsId) {
+        LOG.debug("@GET /news/" + newsId + " get news with id " + newsId);
+        return newsService.get(newsId);
     }
 
     @GET
     @Timed
-    public List<News> readAll() {
-        LOG.debug("@GET /news read all news");
-        return newsService.readAll();
+    public List<News> getAll() {
+        LOG.debug("@GET /news get all news");
+        return newsService.getAll();
     }
 
     @PUT
@@ -53,9 +53,9 @@ public class NewsController {
 
     @DELETE
     @Timed
-    @Path("/{wishlistId}")
-    public void delete(@PathParam("newsId") String newsId) {
-        LOG.debug("@DELETE /news/" + newsId + " read news with id " + newsId);
+    @Path("/{newsId}")
+    public void delete(@PathParam("newsId") int newsId) {
+        LOG.debug("@DELETE /news/" + newsId + " get news with id " + newsId);
         newsService.delete(newsId);
     }
 

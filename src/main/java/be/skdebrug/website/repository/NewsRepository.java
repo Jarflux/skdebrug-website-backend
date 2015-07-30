@@ -62,7 +62,7 @@ public class NewsRepository {
         }).runOperation();
     }
 
-    public News read(final String newsId) {
+    public News get(final int newsId) {
         return (new SQLiteConnection<News>() {
             @Override
             public News defineOperation(Statement statement) throws SQLException {
@@ -75,7 +75,7 @@ public class NewsRepository {
         }).runOperation();
     }
 
-    public List<News> readAll() {
+    public List<News> getAll() {
         return (new SQLiteConnection<List<News>>() {
             @Override
             public List<News> defineOperation(Statement statement) throws SQLException {
@@ -100,7 +100,7 @@ public class NewsRepository {
         }).runOperation();
     }
 
-    public boolean delete(final String newsId) {
+    public boolean delete(final int newsId) {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {

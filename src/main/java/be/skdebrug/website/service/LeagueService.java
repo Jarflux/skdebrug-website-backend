@@ -24,7 +24,7 @@ public class LeagueService {
     public League get(int year){
         League league = new League();
         league.setYear(year);
-        league.calculateStandings(gameService.readAllLeagueBetweenDates(league.getStartDate(), league.getEndDate()));
+        league.calculateStandings(gameService.getAllLeagueBetweenDates(league.getStartDate(), league.getEndDate()));
         return league;
     }
 }

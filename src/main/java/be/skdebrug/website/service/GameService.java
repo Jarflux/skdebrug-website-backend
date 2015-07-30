@@ -5,6 +5,7 @@ import be.skdebrug.website.core.News;
 import be.skdebrug.website.core.Team;
 import be.skdebrug.website.repository.GameRepository;
 import be.skdebrug.website.repository.NewsRepository;
+import be.skdebrug.website.repository.TeamRepository;
 import com.google.inject.Inject;
 import org.joda.time.DateTime;
 
@@ -21,23 +22,26 @@ public class GameService {
     @Inject
     GameRepository gameRepository;
 
+    @Inject
+    TeamRepository teamRepository;
+
     public boolean create(final Game game) {
         return gameRepository.create(game);
     }
 
-    public Game read(final String gameId) {
-        return gameRepository.read(gameId);
+    public Game get(final int gameId) {
+        return addTeamInformation(gameRepository.get(gameId));
     }
 
-    public List<Game> readAll() {
-        return gameRepository.readAll();
+    public List<Game> getAll() {
+        return addTeamInformation(gameRepository.getAll());
     }
 
     public boolean update(final Game game) {
         return gameRepository.update(game);
     }
 
-    public boolean delete(final String gameId) {
+    public boolean delete(final int gameId) {
         return gameRepository.delete(gameId);
     }
 
@@ -46,8 +50,8 @@ public class GameService {
     }
 
     //TODO Test Method
-    public List<Game> readAllLeagueBetweenDates(DateTime start, DateTime end) {
-        List<Game> allGames = readAll();
+    public List<Game> getAllLeagueBetweenDates(DateTime start, DateTime end) {
+        List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
         while(gameIterator.hasNext()){
             Game game = gameIterator.next();
@@ -56,7 +60,20 @@ public class GameService {
                         gameIterator.remove();
             }
         }
-        return allGames;
+        return addTeamInformation(allGames);
+    }
+
+    private Game addTeamInformation(Game game){
+        game.setHomeTeam(teamRepository.get(game.getHomeTeam().getId()));
+        game.setAwayTeam(teamRepository.get(game.getAwayTeam().getId()));
+        return game;
+    }
+
+    private List<Game> addTeamInformation(List<Game> games){
+        for(Game game: games){
+            addTeamInformation(game);
+        }
+        return games;
     }
 
 }

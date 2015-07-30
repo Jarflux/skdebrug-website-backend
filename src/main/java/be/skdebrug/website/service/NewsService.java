@@ -19,19 +19,19 @@ public class NewsService {
         return newsRepository.create(news);
     }
 
-    public News read(final String newsId) {
-        return newsRepository.read(newsId);
+    public News get(final int newsId) {
+        return newsRepository.get(newsId);
     }
 
-    public List<News> readAll() {
-        return newsRepository.readAll();
+    public List<News> getAll() {
+        return newsRepository.getAll();
     }
 
     public boolean update(final News news) {
         return newsRepository.update(news);
     }
 
-    public boolean delete(final String newsId) {
+    public boolean delete(final int newsId) {
         return newsRepository.delete(newsId);
     }
 
