@@ -93,7 +93,6 @@ public class Standing implements Comparable<Standing> {
         this.goalsAgainst += goalsAgainst;
     }
 
-    //TODO Test Method
     public void addStatisticsFromGame(Game game) {
         if (this.getTeam().equals(game.getHomeTeam())) {
             addNumbersBasedOnResult(game.getHomeScore(), game.getAwayScore());
@@ -102,7 +101,6 @@ public class Standing implements Comparable<Standing> {
         }
     }
 
-    //TODO Test Method
     private void addNumbersBasedOnResult(int goalsFor, int goalsAgainst) {
         addGolasFor(goalsFor);
         addGoalsAgainst(goalsAgainst);
@@ -115,7 +113,6 @@ public class Standing implements Comparable<Standing> {
         }
     }
 
-    //TODO Test Method
     @Override
     public int compareTo(Standing o) {
         return comparePoints(o) != 0 ? comparePoints(o) :

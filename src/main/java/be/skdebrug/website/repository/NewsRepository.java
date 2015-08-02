@@ -16,6 +16,7 @@ import java.util.List;
 public class NewsRepository {
     private static final String TBL_NEWS = "tbl_news";
     private static final String COL_NEWS_ID = "newsID";
+    private static final String COL_NEWS_TITLE = "title";
     private static final String COL_NEWS_CONTENT = "content";
 
     public static boolean dropDatabaseOnInjection = false;
@@ -44,7 +45,10 @@ public class NewsRepository {
         (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.execute(log("CREATE TABLE IF NOT EXISTS " + TBL_NEWS + " (" + COL_NEWS_ID + " INTEGER PRIMARY KEY ASC," + COL_NEWS_CONTENT + "," +
+                statement.execute(log("CREATE TABLE IF NOT EXISTS " + TBL_NEWS + " ("
+                        + COL_NEWS_ID + " INTEGER PRIMARY KEY ASC,"
+                        + COL_NEWS_TITLE + ","
+                        + COL_NEWS_CONTENT + "," +
                         "CONSTRAINT unique_" + TBL_NEWS + " UNIQUE(" + COL_NEWS_ID + ") ON CONFLICT IGNORE );"));
                 return true;
             }
@@ -55,8 +59,12 @@ public class NewsRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_NEWS + " (" + COL_NEWS_CONTENT + ") "
-                        + "VALUES ('" + news.getContent() + "');"));
+                statement.executeUpdate(log("INSERT INTO " + TBL_NEWS + " ("
+                        + COL_NEWS_TITLE + ","
+                        + COL_NEWS_CONTENT +  ") "
+                        + "VALUES ('"
+                        + news.getTitle() + "','"
+                        + news.getContent() + "');"));
                 return true;
             }
         }).runOperation();
@@ -93,7 +101,10 @@ public class NewsRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_NEWS + " (" + COL_NEWS_ID + "," + COL_NEWS_CONTENT + ") "
+                statement.executeUpdate(log("INSERT INTO " + TBL_NEWS + " ("
+                        + COL_NEWS_ID + ","
+                        + COL_NEWS_TITLE + ","
+                        + COL_NEWS_CONTENT + ") "
                         + "VALUES ('" + news.getId() + "','" + news.getContent() + "');"));
                 return true;
             }

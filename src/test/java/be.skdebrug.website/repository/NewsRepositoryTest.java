@@ -31,8 +31,22 @@ public class NewsRepositoryTest {
         newsBefore.setContent("I love this content");
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
-        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
         assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+    }
+
+    @Test
+    public void testGetSpecificandDelete(){
+        News newsBefore = new News();
+        newsBefore.setContent("I love this content");
+        newsRepository.create(newsBefore);
+        newsBefore = newsRepository.getAll().get(0);
+        int newsId = newsBefore.getId();
+        News newsAfter = newsRepository.get(newsId);
+        assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
+        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+        newsRepository.delete(newsId);
+        assertThat(newsRepository.getAll().size()).isEqualTo(0);
     }
 
 

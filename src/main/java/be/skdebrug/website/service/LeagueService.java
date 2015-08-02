@@ -20,7 +20,6 @@ public class LeagueService {
         return get(DateTime.now().getYear());
     }
 
-    //TODO Test Method
     public League get(int year){
         League league = new League();
         league.setYear(year);
