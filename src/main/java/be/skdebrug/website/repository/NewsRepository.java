@@ -28,6 +28,7 @@ public class NewsRepository {
     private News parseNewsFromResult(ResultSet queryResult) throws SQLException{
         News news = new News();
         news.setId(queryResult.getInt(COL_NEWS_ID));
+        news.setTitle(queryResult.getString(COL_NEWS_TITLE));
         news.setContent(queryResult.getString(COL_NEWS_CONTENT));
         return news;
     }
@@ -105,7 +106,7 @@ public class NewsRepository {
                         + COL_NEWS_ID + ","
                         + COL_NEWS_TITLE + ","
                         + COL_NEWS_CONTENT + ") "
-                        + "VALUES ('" + news.getId() + "','" + news.getContent() + "');"));
+                        + "VALUES ('" + news.getId() + "','" + news.getTitle() + "','" + news.getContent() + "');"));
                 return true;
             }
         }).runOperation();

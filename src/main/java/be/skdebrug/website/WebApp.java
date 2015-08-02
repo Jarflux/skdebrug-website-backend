@@ -1,6 +1,6 @@
 package be.skdebrug.website;
 
-import be.skdebrug.website.controller.NewsController;
+import be.skdebrug.website.controller.*;
 import be.skdebrug.website.health.DatabaseHealthCheck;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -27,8 +27,16 @@ public class WebApp extends Application<Configuration> {
         //Dependency Injection
         Injector injector = Guice.createInjector();
         final NewsController newsController = injector.getInstance(NewsController.class);
+        final TeamController teamController = injector.getInstance(TeamController.class);
+        final GameController gameController = injector.getInstance(GameController.class);
+        final LeagueController leagueController = injector.getInstance(LeagueController.class);
+        final DevController devController = injector.getInstance(DevController.class);
 
         //Register REST Controllers
         environment.jersey().register(newsController);
+        environment.jersey().register(teamController);
+        environment.jersey().register(gameController);
+        environment.jersey().register(leagueController);
+        environment.jersey().register(devController);
     }
 }

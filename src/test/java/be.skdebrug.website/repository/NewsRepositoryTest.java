@@ -3,6 +3,7 @@ package be.skdebrug.website.repository;
 import be.skdebrug.website.core.News;
 import be.skdebrug.website.endpoint.SQLiteConnection;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -28,10 +29,12 @@ public class NewsRepositoryTest {
     @Test
     public void testCreateAndGet(){
         News newsBefore = new News();
+        newsBefore.setTitle("Lovely Title");
         newsBefore.setContent("I love this content");
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
     }
 
@@ -44,10 +47,25 @@ public class NewsRepositoryTest {
         int newsId = newsBefore.getId();
         News newsAfter = newsRepository.get(newsId);
         assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
+        assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
         newsRepository.delete(newsId);
         assertThat(newsRepository.getAll().size()).isEqualTo(0);
     }
+
+    @Test
+    @Ignore
+    public void testInsert(){
+        News newsBefore = new News();
+        newsBefore.setTitle("De Bruyne en Casteels helden in Duitse Supercup");
+        newsBefore.setContent("Wolfsburg z'on 30 miljoen euro");
+        newsRepository.create(newsBefore);
+        News newsAfter = newsRepository.getAll().get(0);
+        assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
+        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+    }
+
 
 
 }
