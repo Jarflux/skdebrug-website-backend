@@ -58,16 +58,16 @@ public class StandingTest {
      public void testStandingCompareWins(){
         Standing top = new Standing();
         top.setWins(2);
-        top.setTies(1);
-        top.setLosses(1);
-        top.setGoalsFor(1);
-        top.setGoalsAgainst(1);
+        top.setTies(0);
+        top.setLosses(0);
+        top.setGoalsFor(0);
+        top.setGoalsAgainst(0);
         Standing bottom = new Standing();
         bottom.setWins(1);
-        bottom.setTies(1);
-        bottom.setLosses(1);
-        bottom.setGoalsFor(1);
-        bottom.setGoalsAgainst(1);
+        bottom.setTies(3);
+        bottom.setLosses(0);
+        bottom.setGoalsFor(0);
+        bottom.setGoalsAgainst(0);
         assertThat(top.compareTo(bottom)).isEqualTo(-1);
     }
 
@@ -75,50 +75,16 @@ public class StandingTest {
     public void testStandingCompareWinsInverse(){
         Standing top = new Standing();
         top.setWins(1);
-        top.setTies(1);
-        top.setLosses(1);
-        top.setGoalsFor(1);
-        top.setGoalsAgainst(1);
+        top.setTies(3);
+        top.setLosses(0);
+        top.setGoalsFor(0);
+        top.setGoalsAgainst(0);
         Standing bottom = new Standing();
         bottom.setWins(2);
-        bottom.setTies(1);
-        bottom.setLosses(1);
-        bottom.setGoalsFor(1);
-        bottom.setGoalsAgainst(1);
-        assertThat(top.compareTo(bottom)).isEqualTo(1);
-    }
-
-    @Test
-    public void testStandingCompareTies(){
-        Standing top = new Standing();
-        top.setWins(1);
-        top.setTies(2);
-        top.setLosses(1);
-        top.setGoalsFor(1);
-        top.setGoalsAgainst(1);
-        Standing bottom = new Standing();
-        bottom.setWins(1);
-        bottom.setTies(1);
-        bottom.setLosses(1);
-        bottom.setGoalsFor(1);
-        bottom.setGoalsAgainst(1);
-        assertThat(top.compareTo(bottom)).isEqualTo(-1);
-    }
-
-    @Test
-    public void testStandingCompareTiesInverse(){
-        Standing top = new Standing();
-        top.setWins(1);
-        top.setTies(1);
-        top.setLosses(1);
-        top.setGoalsFor(1);
-        top.setGoalsAgainst(1);
-        Standing bottom = new Standing();
-        bottom.setWins(1);
-        bottom.setTies(2);
-        bottom.setLosses(1);
-        bottom.setGoalsFor(1);
-        bottom.setGoalsAgainst(1);
+        bottom.setTies(0);
+        bottom.setLosses(0);
+        bottom.setGoalsFor(0);
+        bottom.setGoalsAgainst(0);
         assertThat(top.compareTo(bottom)).isEqualTo(1);
     }
 
@@ -171,6 +137,23 @@ public class StandingTest {
         bottom.setGoalsFor(1);
         bottom.setGoalsAgainst(0);
         assertThat(top.compareTo(bottom)).isEqualTo(-1);
+    }
+
+    @Test
+    public void testStandingCompareGoalsForInverse(){
+        Standing top = new Standing();
+        top.setWins(1);
+        top.setTies(1);
+        top.setLosses(1);
+        top.setGoalsFor(2);
+        top.setGoalsAgainst(0);
+        Standing bottom = new Standing();
+        bottom.setWins(1);
+        bottom.setTies(1);
+        bottom.setLosses(1);
+        bottom.setGoalsFor(3);
+        bottom.setGoalsAgainst(1);
+        assertThat(top.compareTo(bottom)).isEqualTo(1);
     }
 
     @Test

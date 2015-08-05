@@ -47,5 +47,42 @@ public class TeamRepositoryTest {
         assertThat(teamRepository.getAll().size()).isEqualTo(0);
     }
 
+    @Test
+    public void testInsertWithSingleQuote(){
+        Team teamBefore = new Team();
+        teamBefore.setName("Anderle'cht");
+        teamRepository.create(teamBefore);
+        Team teamAfter = teamRepository.getAll().get(0);
+        assertThat(teamAfter.getId()).isNotNull();
+        assertThat(teamAfter.getName()).isEqualTo(teamBefore.getName());
+    }
+
+    @Test
+    public void testCreateAndUpdate(){
+        Team teamBefore = new Team();
+        teamBefore.setName("Anderlecht");
+        teamRepository.create(teamBefore);
+        teamBefore.setName("Anderlecht2");
+        teamRepository.update(teamBefore);
+        Team teamAfter = teamRepository.getAll().get(0);
+        assertThat(teamAfter.getId()).isNotNull();
+        assertThat(teamAfter.getName()).isEqualTo(teamBefore.getName());
+    }
+
+    @Test
+    public void testCreateMultipleAndDeleteAll(){
+        Team teamBefore = new Team();
+        teamBefore.setName("Anderlecht");
+        teamRepository.create(teamBefore);
+        teamRepository.create(teamBefore);
+        assertThat(teamRepository.getAll().size()).isEqualTo(2);
+        teamRepository.deleteAll();
+        assertThat(teamRepository.getAll().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void testGetTeamWithUnexistingId(){
+        assertThat(teamRepository.get(10000)).isEqualTo(null);
+    }
 
 }

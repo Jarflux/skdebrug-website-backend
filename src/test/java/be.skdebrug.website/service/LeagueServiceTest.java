@@ -55,12 +55,13 @@ public class LeagueServiceTest {
         games.add(createGame(teamA, teamC, 3, 0));
         games.add(createGame(teamC, teamB, 4, 0));
         when(gameService.getAllLeagueBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
-        League league = leagueService.get(2012);
+        League league = leagueService.get(2015);
         List<Standing> standings = league.getStandings();
         // Team A 2 0 0 4 0 4 6
         // Team C 2 0 1 6 3 3 6
         // Team D 0 0 1 0 2 -2 0
         // Team B 0 0 2 0 5 -5 0
+        assertThat(league.getYear()).isEqualTo(2015);
         assertThat(standings.get(0).getTeam().getName()).isEqualTo(teamA.getName());
         assertThat(standings.get(0).getGames()).isEqualTo(2);
         assertThat(standings.get(0).getWins()).isEqualTo(2);

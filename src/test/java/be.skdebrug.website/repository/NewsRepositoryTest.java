@@ -54,10 +54,9 @@ public class NewsRepositoryTest {
     }
 
     @Test
-    @Ignore
-    public void testInsert(){
+    public void testInsertWithSingleQuote(){
         News newsBefore = new News();
-        newsBefore.setTitle("De Bruyne en Casteels helden in Duitse Supercup");
+        newsBefore.setTitle("De Bruyne en Casteels ' helden in Duitse Supercup");
         newsBefore.setContent("Wolfsburg z'on 30 miljoen euro");
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
@@ -66,7 +65,40 @@ public class NewsRepositoryTest {
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
     }
 
+    @Test
+    public void testGetSpecificandUpdate(){
+        News newsBefore = new News();
+        newsBefore.setTitle("I love this title");
+        newsBefore.setContent("I love this content");
+        newsRepository.create(newsBefore);
+        News newsAfter = newsRepository.getAll().get(0);
+        assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
+        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+        newsBefore.setTitle("new title");
+        newsBefore.setContent("new content");
+        newsRepository.update(newsBefore);
+        newsAfter = newsRepository.getAll().get(0);
+        assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
+        assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
+        assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+    }
 
+    @Test
+    public void testCreatetMultipleAndDeleteAll(){
+        News newsBefore = new News();
+        newsBefore.setTitle("I love this title");
+        newsBefore.setContent("I love this content");
+        newsRepository.create(newsBefore);
+        newsRepository.create(newsBefore);
+        assertThat(newsRepository.getAll().size()).isEqualTo(2);
+        newsRepository.deleteAll();
+        assertThat(newsRepository.getAll().size()).isEqualTo(0);
+    }
 
+    @Test
+    public void testGetNewsWithUnexistingId(){
+        assertThat(newsRepository.get(10000)).isEqualTo(null);
+    }
 }
 

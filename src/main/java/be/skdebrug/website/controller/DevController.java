@@ -102,7 +102,7 @@ public class DevController {
                 "Kevin De Bruyne kreeg vlak voor de aftrap zijn trofee voor Speler van het Jaar in de Bundesliga (foto). Dat inspireerde de Rode Duivel echter niet, want het duurde even voor hij zich liet opmerken in de eerste helft.\n" +
                 "\n" +
                 "\n" +
-                "Bij Bayern kwam het gevaar vooral van de nieuwe aanwinst Douglas Costa. De Braziliaan, overgekomen van Sjachtjor Donetsk voor zon 30 miljoen euro, was een ware gesel voor de Wolfsburg-verdediging.\n" +
+                "Bij Bayern kwam het gevaar vooral van de nieuwe aanwinst Douglas Costa. De Braziliaan, overgekomen van Sjachtjor Donetsk voor z'on 30 miljoen euro, was een ware gesel voor de Wolfsburg-verdediging.\n" +
                 "\n" +
                 "Ook Jérôme Boateng zat goed in de wedstrijd. Hij knalde van dichtbij staalhard op de lat. Veel kansen voor de bezoekers, maar geen doelpunten voor de rust.\n" +
                 "\n" +

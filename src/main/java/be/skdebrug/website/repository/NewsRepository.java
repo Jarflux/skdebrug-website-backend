@@ -13,17 +13,11 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 24/05/2015
  */
-public class NewsRepository {
+public class NewsRepository extends AbstractRepository {
     private static final String TBL_NEWS = "tbl_news";
     private static final String COL_NEWS_ID = "newsID";
     private static final String COL_NEWS_TITLE = "title";
     private static final String COL_NEWS_CONTENT = "content";
-
-    public static boolean dropDatabaseOnInjection = false;
-
-    public static void setDatabaseLocation(String path) {
-        SQLiteConnection.databaseLocation = path;
-    }
 
     private News parseNewsFromResult(ResultSet queryResult) throws SQLException{
         News news = new News();
@@ -64,8 +58,8 @@ public class NewsRepository {
                         + COL_NEWS_TITLE + ","
                         + COL_NEWS_CONTENT +  ") "
                         + "VALUES ('"
-                        + news.getTitle() + "','"
-                        + news.getContent() + "');"));
+                        + escapeSingleQuotes(news.getTitle()) + "','"
+                        + escapeSingleQuotes(news.getContent()) + "');"));
                 return true;
             }
         }).runOperation();
@@ -106,7 +100,10 @@ public class NewsRepository {
                         + COL_NEWS_ID + ","
                         + COL_NEWS_TITLE + ","
                         + COL_NEWS_CONTENT + ") "
-                        + "VALUES ('" + news.getId() + "','" + news.getTitle() + "','" + news.getContent() + "');"));
+                        + "VALUES ('"
+                        + news.getId() + "','"
+                        + escapeSingleQuotes(news.getTitle()) + "','"
+                        + escapeSingleQuotes(news.getContent()) + "');"));
                 return true;
             }
         }).runOperation();

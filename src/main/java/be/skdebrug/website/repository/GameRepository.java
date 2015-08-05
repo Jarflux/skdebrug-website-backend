@@ -1,6 +1,7 @@
 package be.skdebrug.website.repository;
 
 import be.skdebrug.website.core.Game;
+import be.skdebrug.website.core.GameType;
 import be.skdebrug.website.core.Team;
 import be.skdebrug.website.endpoint.SQLiteConnection;
 import org.joda.time.DateTime;
@@ -15,7 +16,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-public class GameRepository {
+public class GameRepository extends AbstractRepository {
 
     private static final String TBL_GAME = "tbl_game";
     private static final String COL_GAME_ID = "gameID";
@@ -26,14 +27,9 @@ public class GameRepository {
     private static final String COL_GAME_HOME_SCORE = "homeScore";
     private static final String COL_GAME_AWAY_SCORE = "awayScore";
 
-    public static boolean dropDatabaseOnInjection = false;
-
-    public static void setDatabaseLocation(String path) {
-        SQLiteConnection.databaseLocation = path;
-    }
-
     private Game parseGameFromResult(ResultSet queryResult) throws SQLException {
         Game game = new Game();
+        game.setGameType(GameType.valueOf(queryResult.getString(COL_GAME_TYPE)));
         game.setId(queryResult.getInt(COL_GAME_ID));
         game.setDateStart(new DateTime(queryResult.getLong(COL_GAME_START)));
         Team home = new Team();

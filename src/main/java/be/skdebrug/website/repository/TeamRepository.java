@@ -13,16 +13,10 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-public class TeamRepository {
+public class TeamRepository extends AbstractRepository {
     private static final String TBL_TEAM = "tbl_team";
     private static final String COL_TEAM_ID = "id";
     private static final String COL_TEAM_NAME = "name";
-
-    public static boolean dropDatabaseOnInjection = false;
-
-    public static void setDatabaseLocation(String path) {
-        SQLiteConnection.databaseLocation = path;
-    }
 
     private Team parseTeamFromResult(ResultSet queryResult) throws SQLException{
         Team team = new Team();
@@ -55,8 +49,11 @@ public class TeamRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_TEAM + " (" + COL_TEAM_NAME + ") "
-                        + "VALUES ('" + team.getName() + "');"));
+                statement.executeUpdate(log("INSERT INTO " + TBL_TEAM + " ("
+                        + COL_TEAM_NAME
+                        + ") VALUES ('"
+                        + escapeSingleQuotes(team.getName())
+                        + "');"));
                 return true;
             }
         }).runOperation();
@@ -93,8 +90,12 @@ public class TeamRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_TEAM + " (" + COL_TEAM_ID + "," + COL_TEAM_NAME + ") "
-                        + "VALUES ('" + team.getId() + "','" + team.getName() + "');"));
+                statement.executeUpdate(log("INSERT INTO " + TBL_TEAM + " ("
+                        + COL_TEAM_ID + ","
+                        + COL_TEAM_NAME + ") "
+                        + "VALUES ('"
+                        + team.getId() + "','"
+                        + escapeSingleQuotes(team.getName()) + "');"));
                 return true;
             }
         }).runOperation();

@@ -117,9 +117,8 @@ public class Standing implements Comparable<Standing> {
     public int compareTo(Standing o) {
         return comparePoints(o) != 0 ? comparePoints(o) :
                 compareWins(o) != 0 ? compareWins(o) :
-                        compareTies(o) != 0 ? compareTies(o) :
-                                compareGoalDifference(o) != 0 ? compareGoalDifference(o) :
-                                        compareGoalFor(o) != 0 ? compareGoalFor(o) : 0;
+                        compareGoalDifference(o) != 0 ? compareGoalDifference(o) :
+                                compareGoalFor(o) != 0 ? compareGoalFor(o) : 0;
     }
 
     private int comparePoints(Standing o) {
@@ -140,15 +139,6 @@ public class Standing implements Comparable<Standing> {
         return 0;
     }
 
-
-    private int compareTies(Standing o) {
-        if (this.getTies() > o.getTies()) {
-            return -1;
-        } else if (this.getTies() < o.getTies()) {
-            return 1;
-        }
-        return 0;
-    }
 
     private int compareGoalDifference(Standing o) {
         if (this.getGoalDifference() > o.getGoalDifference()) {

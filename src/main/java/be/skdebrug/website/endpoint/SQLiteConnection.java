@@ -1,5 +1,6 @@
 package be.skdebrug.website.endpoint;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import java.sql.Connection;
@@ -43,6 +44,5 @@ public abstract class SQLiteConnection<RESULT> {
         LOG.debug("Executing Query - " + query);
         return query;
     }
-
 
 }
