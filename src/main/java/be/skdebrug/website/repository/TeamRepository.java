@@ -90,12 +90,10 @@ public class TeamRepository extends AbstractRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_TEAM + " ("
-                        + COL_TEAM_ID + ","
-                        + COL_TEAM_NAME + ") "
-                        + "VALUES ('"
-                        + team.getId() + "','"
-                        + escapeSingleQuotes(team.getName()) + "');"));
+                statement.executeUpdate(log("UPDATE " + TBL_TEAM
+                        + " SET "
+                        + COL_TEAM_NAME + " = '" + escapeSingleQuotes(team.getName()) + "' "
+                        + "WHERE " + COL_TEAM_ID + " = '" + team.getId() + "' "));
                 return true;
             }
         }).runOperation();

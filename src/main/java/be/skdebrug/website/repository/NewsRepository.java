@@ -96,14 +96,11 @@ public class NewsRepository extends AbstractRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_NEWS + " ("
-                        + COL_NEWS_ID + ","
-                        + COL_NEWS_TITLE + ","
-                        + COL_NEWS_CONTENT + ") "
-                        + "VALUES ('"
-                        + news.getId() + "','"
-                        + escapeSingleQuotes(news.getTitle()) + "','"
-                        + escapeSingleQuotes(news.getContent()) + "');"));
+                statement.executeUpdate(log("UPDATE " + TBL_NEWS
+                        + " SET "
+                        + COL_NEWS_TITLE + " = '" + escapeSingleQuotes(news.getTitle()) + "', "
+                        + COL_NEWS_CONTENT + " = '" + escapeSingleQuotes(news.getContent()) + "' "
+                        + "WHERE " + COL_NEWS_ID + " = '" + news.getId() + "' "));
                 return true;
             }
         }).runOperation();

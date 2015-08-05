@@ -42,76 +42,66 @@ public class PlayerRepositoryTest {
         assertThat(playerAfter.getLastName()).isEqualTo(playerBefore.getLastName());
         assertThat(playerAfter.getDateOfBirth().getMillis()).isEqualTo(playerBefore.getDateOfBirth().getMillis());
         assertThat(playerAfter.getNumber()).isEqualTo(1);
-        assertThat(playerAfter.getPlayerType()).isEqualTo(PlayerType.GOALKEEPER);
+        assertThat(playerAfter.getPlayerType()).isEqualTo(playerBefore.getPlayerType());
     }
 
-//    @Test
-//    public void testGetSpecificAndDelete(){
-//        Team home = new Team();
-//        home.setId(54321);
-//        home.setName("FC Barcelona");
-//        Team away = new Team();
-//        away.setId(12345);
-//        away.setName("Club Brugge");
-//        Game gameBefore = new Game();
-//        gameBefore.setDateStart(new DateTime());
-//        gameBefore.setHomeTeam(home);
-//        gameBefore.setAwayTeam(away);
-//        gameBefore.setHomeScore(2);
-//        gameBefore.setAwayScore(5);
-//        gameRepository.create(gameBefore);
-//        int gameId = gameRepository.getAll().get(0).getId();
-//        Game gameAfter = gameRepository.get(gameId);
-//        assertThat(gameAfter.getId()).isNotNull();
-//        assertThat(gameAfter.getDateStart()).isEqualTo(gameBefore.getDateStart());
-//        assertThat(gameAfter.getHomeTeam().getId()).isEqualTo(gameBefore.getHomeTeam().getId());
-//        assertThat(gameAfter.getAwayTeam().getId()).isEqualTo(gameBefore.getAwayTeam().getId());
-//        assertThat(gameAfter.getHomeScore()).isEqualTo(gameBefore.getHomeScore());
-//        assertThat(gameAfter.getAwayScore()).isEqualTo(gameBefore.getAwayScore());
-//        gameRepository.delete(gameId);
-//        assertThat(gameRepository.getAll().size()).isEqualTo(0);
-//    }
-//
-//    @Test
-//    public void testCreateAndUpdate(){
-//        Team home = new Team();
-//        home.setId(54321);
-//        home.setName("FC Barcelona");
-//        Team away = new Team();
-//        away.setId(12345);
-//        away.setName("Club Brugge");
-//        Game gameBefore = new Game();
-//        gameBefore.setDateStart(new DateTime());
-//        gameBefore.setHomeTeam(home);
-//        gameBefore.setAwayTeam(away);
-//        gameBefore.setHomeScore(2);
-//        gameBefore.setAwayScore(5);
-//        gameRepository.create(gameBefore);
-//        Game gameAfter = gameRepository.getAll().get(0);
-//        assertThat(gameAfter.getId()).isNotNull();
-//        assertThat(gameAfter.getDateStart()).isEqualTo(gameBefore.getDateStart());
-//        assertThat(gameAfter.getHomeTeam().getId()).isEqualTo(gameBefore.getHomeTeam().getId());
-//        assertThat(gameAfter.getAwayTeam().getId()).isEqualTo(gameBefore.getAwayTeam().getId());
-//        assertThat(gameAfter.getHomeScore()).isEqualTo(gameBefore.getHomeScore());
-//        assertThat(gameAfter.getAwayScore()).isEqualTo(gameBefore.getAwayScore());
-//
-//        gameBefore.setDateStart(new DateTime());
-//        gameBefore.setHomeTeam(away);
-//        gameBefore.setAwayTeam(home);
-//        gameBefore.setHomeScore(123);
-//        gameBefore.setAwayScore(456);
-//        gameRepository.update(gameBefore);
-//        gameAfter = gameRepository.getAll().get(0);
-//        assertThat(gameAfter.getId()).isNotNull();
-//        assertThat(gameAfter.getDateStart()).isEqualTo(gameBefore.getDateStart());
-//        assertThat(gameAfter.getHomeTeam().getId()).isEqualTo(gameBefore.getHomeTeam().getId());
-//        assertThat(gameAfter.getAwayTeam().getId()).isEqualTo(gameBefore.getAwayTeam().getId());
-//        assertThat(gameAfter.getHomeScore()).isEqualTo(gameBefore.getHomeScore());
-//        assertThat(gameAfter.getAwayScore()).isEqualTo(gameBefore.getAwayScore());
-//    }
+    @Test
+    public void testGetSpecificAndDelete(){
+        Player playerBefore = new Player();
+        playerBefore.setFirstName("Gunther");
+        playerBefore.setLastName("Dillen");
+        playerBefore.setDateOfBirth(DateTime.now());
+        playerBefore.setNumber(1);
+        playerBefore.setPlayerType(PlayerType.GOALKEEPER);
+        playerRepository.create(playerBefore);
+        int playerId = playerRepository.getAll().get(0).getId();
+        Player playerAfter = playerRepository.get(playerId);
+        assertThat(playerAfter.getId()).isNotNull();
+        assertThat(playerAfter.getFirstName()).isEqualTo(playerBefore.getFirstName());
+        assertThat(playerAfter.getLastName()).isEqualTo(playerBefore.getLastName());
+        assertThat(playerAfter.getDateOfBirth().getMillis()).isEqualTo(playerBefore.getDateOfBirth().getMillis());
+        assertThat(playerAfter.getNumber()).isEqualTo(1);
+        assertThat(playerAfter.getPlayerType()).isEqualTo(playerBefore.getPlayerType());
+        playerRepository.delete(playerId);
+        assertThat(playerRepository.getAll().size()).isEqualTo(0);
+    }
 
     @Test
-    public void testCreateMultipleAnd(){
+    public void testCreateAndUpdate(){
+        Player playerBefore = new Player();
+        playerBefore.setFirstName("Gunther");
+        playerBefore.setLastName("Dillen");
+        playerBefore.setDateOfBirth(DateTime.now());
+        playerBefore.setNumber(1);
+        playerBefore.setPlayerType(PlayerType.GOALKEEPER);
+        playerRepository.create(playerBefore);
+        Player playerAfter = playerRepository.getAll().get(0);
+        assertThat(playerAfter.getId()).isNotNull();
+        assertThat(playerAfter.getFirstName()).isEqualTo(playerBefore.getFirstName());
+        assertThat(playerAfter.getLastName()).isEqualTo(playerBefore.getLastName());
+        assertThat(playerAfter.getDateOfBirth().getMillis()).isEqualTo(playerBefore.getDateOfBirth().getMillis());
+        assertThat(playerAfter.getNumber()).isEqualTo(playerBefore.getNumber());
+        assertThat(playerAfter.getPlayerType()).isEqualTo(playerBefore.getPlayerType());
+
+        playerBefore = playerRepository.getAll().get(0);
+        playerBefore.setFirstName("Gunther1");
+        playerBefore.setLastName("Dillen1");
+        playerBefore.setDateOfBirth(DateTime.now());
+        playerBefore.setNumber(2);
+        playerBefore.setPlayerType(PlayerType.STRIKER);
+        playerRepository.update(playerBefore);
+        assertThat(playerRepository.getAll().size()).isEqualTo(1);
+        playerAfter = playerRepository.getAll().get(0);
+        assertThat(playerAfter.getId()).isNotNull();
+        assertThat(playerAfter.getFirstName()).isEqualTo(playerBefore.getFirstName());
+        assertThat(playerAfter.getLastName()).isEqualTo(playerBefore.getLastName());
+        assertThat(playerAfter.getDateOfBirth().getMillis()).isEqualTo(playerBefore.getDateOfBirth().getMillis());
+        assertThat(playerAfter.getNumber()).isEqualTo(playerBefore.getNumber());
+        assertThat(playerAfter.getPlayerType()).isEqualTo(playerBefore.getPlayerType());
+    }
+
+    @Test
+    public void testCreateMultipleAndDeleteAll(){
         Player playerBefore = new Player();
         playerBefore.setFirstName("Gunther");
         playerBefore.setLastName("Dillen");

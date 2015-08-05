@@ -75,9 +75,12 @@ public class NewsRepositoryTest {
         assertThat(newsAfter.getId()).isNotNull();
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
+
+        newsBefore = newsRepository.getAll().get(0);
         newsBefore.setTitle("new title");
         newsBefore.setContent("new content");
         newsRepository.update(newsBefore);
+        assertThat(newsRepository.getAll().size()).isEqualTo(1);
         newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());

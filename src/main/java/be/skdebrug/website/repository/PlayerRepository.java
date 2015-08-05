@@ -73,8 +73,8 @@ public class PlayerRepository extends AbstractRepository {
                         + COL_PLAYER_NUMBER + ","
                         + COL_PLAYER_TYPE
                         + ") VALUES ('"
-                        + player.getFirstName() + "','"
-                        + player.getLastName() + "','"
+                        + escapeSingleQuotes(player.getFirstName()) + "','"
+                        + escapeSingleQuotes(player.getLastName()) + "','"
                         + player.getDateOfBirth().getMillis() + "','"
                         + player.getNumber() + "','"
                         + player.getPlayerType() + "');"));
@@ -114,20 +114,14 @@ public class PlayerRepository extends AbstractRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_PLAYER + " ("
-                        + COL_PLAYER_ID + ","
-                        + COL_PLAYER_FIRST_NAME + ","
-                        + COL_PLAYER_LAST_NAME + ","
-                        + COL_PLAYER_DATE_OF_BIRTH + ","
-                        + COL_PLAYER_NUMBER + ","
-                        + COL_PLAYER_TYPE
-                        + ") VALUES ('"
-                        + player.getId() + "','"
-                        + player.getFirstName() + "','"
-                        + player.getLastName() + "','"
-                        + player.getDateOfBirth().getMillis() + "','"
-                        + player.getNumber() + "','"
-                        + player.getPlayerType() + "');"));
+                statement.executeUpdate(log("UPDATE " + TBL_PLAYER
+                        + " SET "
+                        + COL_PLAYER_FIRST_NAME + " = '" + player.getFirstName() + "', "
+                        + COL_PLAYER_LAST_NAME + " = '" + player.getLastName() + "', "
+                        + COL_PLAYER_DATE_OF_BIRTH + " = '" + player.getDateOfBirth().getMillis() + "', "
+                        + COL_PLAYER_NUMBER + " = '" + player.getNumber() + "', "
+                        + COL_PLAYER_TYPE + " = '" + player.getPlayerType() + "' "
+                        + "WHERE " + COL_PLAYER_ID + " = '" + player.getId() + "' "));
                 return true;
             }
         }).runOperation();

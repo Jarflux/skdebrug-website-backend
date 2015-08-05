@@ -62,8 +62,11 @@ public class TeamRepositoryTest {
         Team teamBefore = new Team();
         teamBefore.setName("Anderlecht");
         teamRepository.create(teamBefore);
+
+        teamBefore = teamRepository.getAll().get(0);
         teamBefore.setName("Anderlecht2");
         teamRepository.update(teamBefore);
+        assertThat(teamRepository.getAll().size()).isEqualTo(1);
         Team teamAfter = teamRepository.getAll().get(0);
         assertThat(teamAfter.getId()).isNotNull();
         assertThat(teamAfter.getName()).isEqualTo(teamBefore.getName());

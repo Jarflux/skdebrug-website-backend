@@ -108,6 +108,7 @@ public class GameRepositoryTest {
         assertThat(gameAfter.getHomeScore()).isEqualTo(gameBefore.getHomeScore());
         assertThat(gameAfter.getAwayScore()).isEqualTo(gameBefore.getAwayScore());
 
+        gameBefore = gameRepository.getAll().get(0);
         gameBefore.setDateStart(new DateTime());
         gameBefore.setGameType(GameType.CUP);
         gameBefore.setHomeTeam(away);
@@ -115,6 +116,7 @@ public class GameRepositoryTest {
         gameBefore.setHomeScore(123);
         gameBefore.setAwayScore(456);
         gameRepository.update(gameBefore);
+        assertThat(gameRepository.getAll().size()).isEqualTo(1);
         gameAfter = gameRepository.getAll().get(0);
         assertThat(gameAfter.getId()).isNotNull();
         assertThat(gameAfter.getGameType()).isEqualTo(gameBefore.getGameType());

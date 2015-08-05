@@ -79,8 +79,8 @@ public class GameRepository extends AbstractRepository {
                         + COL_GAME_HOME_TEAM + ","
                         + COL_GAME_AWAY_TEAM + ","
                         + COL_GAME_HOME_SCORE + ","
-                        + COL_GAME_AWAY_SCORE + ") "
-                        + "VALUES ('"
+                        + COL_GAME_AWAY_SCORE
+                        + ") VALUES ('"
                         + game.getGameType() + "','"
                         + game.getDateStart().getMillis() + "','"
                         + game.getHomeTeam().getId() + "','"
@@ -123,22 +123,15 @@ public class GameRepository extends AbstractRepository {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
-                statement.executeUpdate(log("INSERT INTO " + TBL_GAME + " ("
-                        + COL_GAME_ID + ","
-                        + COL_GAME_TYPE + ","
-                        + COL_GAME_START + ","
-                        + COL_GAME_HOME_TEAM + ","
-                        + COL_GAME_AWAY_TEAM + ","
-                        + COL_GAME_HOME_SCORE + ","
-                        + COL_GAME_AWAY_SCORE + ") "
-                        + "VALUES ('"
-                        + game.getId() + "','"
-                        + game.getGameType() + "','"
-                        + game.getDateStart().getMillis() + "','"
-                        + game.getHomeTeam().getId() + "','"
-                        + game.getAwayTeam().getId() + "','"
-                        + game.getHomeScore() + "','"
-                        + game.getAwayScore() + "');"));
+                statement.executeUpdate(log("UPDATE " + TBL_GAME
+                        + " SET "
+                        + COL_GAME_START + " = '" + game.getDateStart().getMillis() + "', "
+                        + COL_GAME_TYPE + " = '" + game.getGameType() + "', "
+                        + COL_GAME_HOME_TEAM + " = '" + game.getHomeTeam().getId() + "', "
+                        + COL_GAME_AWAY_TEAM + " = '" + game.getAwayTeam().getId() + "', "
+                        + COL_GAME_HOME_SCORE + " = '" + game.getHomeScore() + "', "
+                        + COL_GAME_AWAY_SCORE + " = '" + game.getAwayScore() + "' "
+                        + "WHERE " + COL_GAME_ID + " = '" + game.getId() + "' "));
                 return true;
             }
         }).runOperation();
