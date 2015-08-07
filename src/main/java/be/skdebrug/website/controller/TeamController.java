@@ -27,7 +27,7 @@ public class TeamController {
     @Timed
     @Path("/{teamId}")
     public Team get(@PathParam("teamId") int teamId) {
-        LOG.debug("@GET /news/" + teamId + " get news with id " + teamId);
+        LOG.debug("@GET /team/" + teamId + " get team with id " + teamId);
         return teamService.get(teamId);
     }
 
