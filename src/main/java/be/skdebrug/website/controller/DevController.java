@@ -1,11 +1,9 @@
 package be.skdebrug.website.controller;
 
-import be.skdebrug.website.core.Game;
-import be.skdebrug.website.core.GameType;
-import be.skdebrug.website.core.News;
-import be.skdebrug.website.core.Team;
+import be.skdebrug.website.core.*;
 import be.skdebrug.website.service.GameService;
 import be.skdebrug.website.service.NewsService;
+import be.skdebrug.website.service.PlayerService;
 import be.skdebrug.website.service.TeamService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -34,6 +32,8 @@ public class DevController {
     private GameService gameService;
     @Inject
     private NewsService newsService;
+    @Inject
+    private PlayerService playerService;
 
     @GET
     @Timed
@@ -43,9 +43,41 @@ public class DevController {
         newsService.deleteAll();
         gameService.deleteAll();
         teamService.deleteAll();
+        playerService.deleteAll();
         fillTeams();
         fillNews();
         fillGames();
+        fillPlayers();
+    }
+
+    private void fillPlayers() {
+        fillPlayer("Gunther", "Dillen", 1, PlayerType.GOALKEEPER);
+        fillPlayer("Ben", "Oeyen", 2, PlayerType.DEFENDER);
+        fillPlayer("Glenn", "Gersis", 4, PlayerType.DEFENDER);
+        fillPlayer("Robin", "Oeyen", 5,PlayerType.MIDFIELDER);
+        fillPlayer("Maarten", "Mennes", 6,PlayerType.DEFENDER);
+        fillPlayer("Dave", "Haenen", 7,PlayerType.MIDFIELDER);
+        fillPlayer("Arne", "Vergauwen", 8,PlayerType.MIDFIELDER);
+        fillPlayer("Stefan", "Lauwers", 9,PlayerType.MIDFIELDER);
+        fillPlayer("Stijn", "De Mayer", 10, PlayerType.MIDFIELDER);
+        fillPlayer("Mathijs", "Bettens", 11,PlayerType.STRIKER);
+        fillPlayer("Steven", "Heirbaut", 12,PlayerType.DEFENDER);
+        fillPlayer("Mikka", "Uten", 13,PlayerType.STRIKER);
+        fillPlayer("Nick", "Vandeperre", 14,PlayerType.STRIKER);
+        fillPlayer("Simon", "Bettens", 16,PlayerType.MIDFIELDER);
+        fillPlayer("Thijs", "Dillen", 17,PlayerType.MIDFIELDER);
+        fillPlayer("Johan", "Offeciers", 18,PlayerType.DEFENDER);
+        fillPlayer("Benjamin", "Berckmoes", 19,PlayerType.MIDFIELDER);
+        fillPlayer("Renze", "De Locht", 20,PlayerType.DEFENDER);
+    }
+
+    private void fillPlayer(String firstName, String lastName, int number, PlayerType playerType) {
+        Player player = new Player();
+        player.setFirstName(firstName);
+        player.setLastName(lastName);
+        player.setNumber(number);
+        player.setPlayerType(playerType);
+        player.setDateOfBirth(DateTime.now());
     }
 
     private void fillGames() {
@@ -153,5 +185,6 @@ public class DevController {
         newsService.deleteAll();
         gameService.deleteAll();
         teamService.deleteAll();
+        playerService.deleteAll();
     }
 }

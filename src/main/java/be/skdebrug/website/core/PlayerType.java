@@ -5,5 +5,5 @@ package be.skdebrug.website.core;
  * Date: 04/08/15
  */
 public enum PlayerType {
-    GOALKEEPER, DEFFENDER, MIDFIELDER, STRIKER
+    GOALKEEPER, DEFENDER, MIDFIELDER, STRIKER
 }
