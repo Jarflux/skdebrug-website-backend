@@ -52,7 +52,8 @@ public class DevController {
 
     private void fillPlayers() {
         fillPlayer("Gunther", "Dillen", 1, PlayerType.GOALKEEPER);
-        fillPlayer("Ben", "Oeyen", 2, PlayerType.DEFENDER);
+        fillPlayer("Frederik", "Verboven", 2, PlayerType.DEFENDER);
+        fillPlayer("Ben", "Oeyen", 3, PlayerType.DEFENDER);
         fillPlayer("Glenn", "Gersis", 4, PlayerType.DEFENDER);
         fillPlayer("Robin", "Oeyen", 5,PlayerType.MIDFIELDER);
         fillPlayer("Maarten", "Mennes", 6,PlayerType.DEFENDER);
