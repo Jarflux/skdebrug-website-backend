@@ -20,7 +20,7 @@ public class NewsController {
     private final static Logger LOG = Logger.getLogger(NewsController.class);
 
     @Inject
-    private NewsService newsService;
+    protected NewsService newsService;
 
     @GET
     @Timed

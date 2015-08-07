@@ -27,13 +27,13 @@ public class DevController {
     private final static Logger LOG = Logger.getLogger(DevController.class);
 
     @Inject
-    private TeamService teamService;
+    protected TeamService teamService;
     @Inject
-    private GameService gameService;
+    protected GameService gameService;
     @Inject
-    private NewsService newsService;
+    protected NewsService newsService;
     @Inject
-    private PlayerService playerService;
+    protected PlayerService playerService;
 
     @GET
     @Timed

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class PlayerService {
     @Inject
-    PlayerRepository playerRepository;
+    protected PlayerRepository playerRepository;
 
     public boolean create(final Player player) {
         return playerRepository.create(player);

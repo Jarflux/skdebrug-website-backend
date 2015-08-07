@@ -21,7 +21,7 @@ public class TeamController {
     private final static Logger LOG = Logger.getLogger(TeamController.class);
 
     @Inject
-    private TeamService teamService;
+    protected TeamService teamService;
 
     @GET
     @Timed

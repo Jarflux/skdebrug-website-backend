@@ -20,10 +20,10 @@ import java.util.List;
 public class GameService {
 
     @Inject
-    GameRepository gameRepository;
+    protected GameRepository gameRepository;
 
     @Inject
-    TeamRepository teamRepository;
+    protected TeamRepository teamRepository;
 
     public boolean create(final Game game) {
         return gameRepository.create(game);

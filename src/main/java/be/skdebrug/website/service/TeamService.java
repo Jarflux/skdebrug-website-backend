@@ -13,7 +13,7 @@ import java.util.List;
 public class TeamService {
 
     @Inject
-    TeamRepository teamRepository;
+    protected TeamRepository teamRepository;
 
     public boolean create(final Team team) {
         return teamRepository.create(team);

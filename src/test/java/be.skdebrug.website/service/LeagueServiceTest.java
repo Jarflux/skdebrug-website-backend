@@ -26,7 +26,6 @@ public class LeagueServiceTest {
 
     private GameService gameService;
 
-    @Inject
     private LeagueService leagueService;
 
     private Team teamA = new Team();

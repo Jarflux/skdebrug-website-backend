@@ -13,7 +13,7 @@ import java.util.List;
 public class NewsService {
 
     @Inject
-    NewsRepository newsRepository;
+    protected NewsRepository newsRepository;
 
     public boolean create(final News news) {
         return newsRepository.create(news);

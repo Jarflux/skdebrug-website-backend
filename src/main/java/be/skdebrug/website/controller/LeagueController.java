@@ -22,7 +22,7 @@ public class LeagueController {
     private final static Logger LOG = Logger.getLogger(LeagueController.class);
 
     @Inject
-    private LeagueService leagueService;
+    protected LeagueService leagueService;
 
     @GET
     @Timed

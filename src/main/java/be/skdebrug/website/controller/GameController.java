@@ -21,7 +21,7 @@ public class GameController {
     private final static Logger LOG = Logger.getLogger(GameController.class);
 
     @Inject
-    private GameService gameService;
+    protected GameService gameService;
 
     @GET
     @Timed
