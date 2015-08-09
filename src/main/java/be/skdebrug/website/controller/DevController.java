@@ -79,6 +79,7 @@ public class DevController {
         player.setNumber(number);
         player.setPlayerType(playerType);
         player.setDateOfBirth(DateTime.now());
+        playerService.create(player);
     }
 
     private void fillGames() {
