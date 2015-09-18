@@ -88,4 +88,9 @@ public class TeamRepositoryTest {
         assertThat(teamRepository.get(10000)).isEqualTo(null);
     }
 
+    @Test
+    public void testGetTeamWithUnexistingName(){
+        assertThat(teamRepository.get("qweriiudsdfghjhb")).isEqualTo(null);
+    }
+
 }

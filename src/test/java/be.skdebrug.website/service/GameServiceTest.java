@@ -11,6 +11,8 @@ import com.google.inject.Injector;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,12 @@ public class GameServiceTest {
         game = mock(Game.class);
         when(game.getHomeTeam()).thenReturn(team);
         when(game.getAwayTeam()).thenReturn(team);
+        when(game.getDate()).thenReturn(new DateTime());
+        games.add(game);
+        games.add(game);
+        games.add(game);
+        games.add(game);
+        games.add(game);
         games.add(game);
         games.add(game);
         TeamRepository teamRepositoryMock = mock(TeamRepository.class);
@@ -61,7 +69,7 @@ public class GameServiceTest {
     @Test
     public void getAllGames(){
         assertThat(gameService.getAll()).isEqualTo(games);
-        assertThat(gameService.getAll().size()).isEqualTo(2);
+        assertThat(gameService.getAll().size()).isEqualTo(7);
         assertThat(gameService.getAll().get(0)).isEqualTo(game);
         assertThat(gameService.getAll().get(1)).isEqualTo(game);
     }
@@ -89,4 +97,95 @@ public class GameServiceTest {
         gameService.create(game);
         verify(gameService.gameRepository, times(1)).create(game);
     }
+
+
+    @Test
+    public void getAllBefore(){
+        List<Game> games = new ArrayList<>();
+        games.add(createMockGame(1, new DateTime().plusDays(21)));
+        games.add(createMockGame(4, new DateTime()));
+        games.add(createMockGame(2, new DateTime().plusDays(14)));
+        games.add(createMockGame(5, new DateTime().minusDays(7)));
+        games.add(createMockGame(3, new DateTime().plusDays(7)));
+        GameRepository gameRepositoryMock = mock(GameRepository.class);
+        when(gameRepositoryMock.getAll()).thenReturn(games);
+        gameService.gameRepository = gameRepositoryMock;
+        assertThat(gameService.getAllAfterDate(new DateTime()).size()).isEqualTo(3);
+    }
+
+    @Test
+    public void getAllAfter(){
+        List<Game> games = new ArrayList<>();
+        games.add(createMockGame(1, new DateTime().plusDays(21)));
+        games.add(createMockGame(4, new DateTime()));
+        games.add(createMockGame(2, new DateTime().plusDays(14)));
+        games.add(createMockGame(5, new DateTime().minusDays(7)));
+        games.add(createMockGame(3, new DateTime().plusDays(7)));
+        GameRepository gameRepositoryMock = mock(GameRepository.class);
+        when(gameRepositoryMock.getAll()).thenReturn(games);
+        gameService.gameRepository = gameRepositoryMock;
+        assertThat(gameService.getAllBeforeDate(new DateTime()).size()).isEqualTo(2);
+    }
+
+    @Test
+    public void testGetAllBetweenDates(){
+        List<Game> games = new ArrayList<>();
+        games.add(createMockGame(5, new DateTime().minusDays(21)));
+        games.add(createMockGame(5, new DateTime().minusDays(14)));
+        games.add(createMockGame(5, new DateTime().minusDays(7)));
+        games.add(createMockGame(4, new DateTime()));
+        games.add(createMockGame(3, new DateTime().plusDays(7)));
+        games.add(createMockGame(2, new DateTime().plusDays(14)));
+        games.add(createMockGame(1, new DateTime().plusDays(21)));
+        GameRepository gameRepositoryMock = mock(GameRepository.class);
+        when(gameRepositoryMock.getAll()).thenReturn(games);
+        gameService.gameRepository = gameRepositoryMock;
+        assertThat(gameService.getAllBetweenDates(new DateTime().minusDays(8), new DateTime().plusDays(15)).size()).isEqualTo(4);
+    }
+
+    @Test
+    public void getNext5Games(){
+        List<Game> games = new ArrayList<>();
+        games.add(createMockGame(1, new DateTime().plusDays(21)));
+        games.add(createMockGame(2, new DateTime().plusDays(14)));
+        games.add(createMockGame(3, new DateTime().plusDays(7)));
+        GameRepository gameRepositoryMock = mock(GameRepository.class);
+        when(gameRepositoryMock.getAll(any(Integer.class))).thenReturn(games);
+        gameService.gameRepository = gameRepositoryMock;
+
+        List<Game> nextGames = gameService.getNextCertainAmountOfGames(3, 1);
+        assertThat(nextGames.size()).isEqualTo(3);
+        assertThat(nextGames.get(0).getId()).isEqualTo(3);
+        assertThat(nextGames.get(1).getId()).isEqualTo(2);
+        assertThat(nextGames.get(2).getId()).isEqualTo(1);
+    }
+
+    @Test
+    public void getPrev5Games(){
+        List<Game> games = new ArrayList<>();
+        games.add(createMockGame(1, new DateTime().minusDays(21)));
+        games.add(createMockGame(2, new DateTime().minusDays(14)));
+        games.add(createMockGame(3, new DateTime().minusDays(7)));
+        GameRepository gameRepositoryMock = mock(GameRepository.class);
+        when(gameRepositoryMock.getAll(any(Integer.class))).thenReturn(games);
+        gameService.gameRepository = gameRepositoryMock;
+
+        List<Game> prevGames = gameService.getPreviousCertainAmountOfGames(3, 1);
+        assertThat(prevGames.size()).isEqualTo(3);
+        assertThat(prevGames.get(0).getId()).isEqualTo(1);
+        assertThat(prevGames.get(1).getId()).isEqualTo(2);
+        assertThat(prevGames.get(2).getId()).isEqualTo(3);
+    }
+
+    private Game createMockGame(int id, DateTime dateTime){
+        Game game = mock(Game.class);
+        when(game.getId()).thenReturn(id);
+        when(game.getDate()).thenReturn(dateTime);
+        Team team = mock(Team.class);
+        when(team.getId()).thenReturn(1);
+        when(game.getHomeTeam()).thenReturn(team);
+        when(game.getAwayTeam()).thenReturn(team);
+        return game;
+    }
+
 }

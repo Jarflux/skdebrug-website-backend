@@ -23,6 +23,10 @@ public class TeamService {
         return teamRepository.get(teamId);
     }
 
+    public Team get(final String teamName) {
+        return teamRepository.get(teamName);
+    }
+
     public List<Team> getAll() {
         return teamRepository.getAll();
     }

@@ -6,7 +6,6 @@ import be.skdebrug.website.core.Standing;
 import be.skdebrug.website.core.Team;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.joda.time.DateTime;
 import org.junit.Before;
@@ -44,16 +43,17 @@ public class LeagueServiceTest {
         teamB.setName("B");
         teamC.setName("C");
         teamD.setName("D");
-    }
-
-    @Test
-    public void testLeagueCalculation() throws JsonProcessingException{
         List<Game> games = new ArrayList<>();
         games.add(createGame(teamA, teamB, 1, 0));
         games.add(createGame(teamC, teamD, 2, 0));
         games.add(createGame(teamA, teamC, 3, 0));
         games.add(createGame(teamC, teamB, 4, 0));
-        when(gameService.getAllLeagueBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
+        when(gameService.getAllBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
+    }
+
+    @Test
+    public void testLeagueCalculation() throws JsonProcessingException{
+
         League league = leagueService.get(2015);
         List<Standing> standings = league.getStandings();
         // Team A 2 0 0 4 0 4 6
@@ -109,5 +109,10 @@ public class LeagueServiceTest {
         game.setHomeScore(homeScore);
         game.setAwayScore(awayScore);
         return game;
+    }
+
+    @Test
+    public void testCurrentLeague(){
+        assertThat(leagueService.getCurrent().getStandings().size()).isEqualTo(4);
     }
 }

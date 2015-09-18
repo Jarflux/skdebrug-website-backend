@@ -1,15 +1,13 @@
 package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.Game;
-import be.skdebrug.website.core.News;
-import be.skdebrug.website.core.Team;
 import be.skdebrug.website.repository.GameRepository;
-import be.skdebrug.website.repository.NewsRepository;
 import be.skdebrug.website.repository.TeamRepository;
 import com.google.inject.Inject;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -37,6 +35,10 @@ public class GameService {
         return addTeamInformation(gameRepository.getAll());
     }
 
+    public List<Game> getAll(int teamid) {
+        return addTeamInformation(gameRepository.getAll(teamid));
+    }
+
     public boolean update(final Game game) {
         return gameRepository.update(game);
     }
@@ -49,27 +51,86 @@ public class GameService {
         return gameRepository.deleteAll();
     }
 
-    //TODO Test Method
-    public List<Game> getAllLeagueBetweenDates(DateTime start, DateTime end) {
+    public List<Game> getAllBetweenDates(DateTime start, DateTime end) {
         List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
         while(gameIterator.hasNext()){
             Game game = gameIterator.next();
-            if (!game.getDateStart().isAfter(start)
-                    || !game.getDateStart().isBefore(end)) {
+            if (!game.getDate().isAfter(start)
+                    || !game.getDate().isBefore(end)) {
                         gameIterator.remove();
             }
         }
         return addTeamInformation(allGames);
     }
 
-    private Game addTeamInformation(Game game){
+    public List<Game> getAllBeforeDate(DateTime end){
+        List<Game> allGames = getAll();
+        Iterator<Game> gameIterator = allGames.iterator();
+        while(gameIterator.hasNext()){
+            Game game = gameIterator.next();
+            if (!game.getDate().isBefore(end)) {
+                gameIterator.remove();
+            }
+        }
+        return addTeamInformation(allGames);
+    }
+
+    public List<Game> getAllAfterDate(DateTime start){
+        List<Game> allGames = getAll();
+        Iterator<Game> gameIterator = allGames.iterator();
+        while(gameIterator.hasNext()){
+            Game game = gameIterator.next();
+            if (!game.getDate().isAfter(start)) {
+                gameIterator.remove();
+            }
+        }
+        return addTeamInformation(allGames);
+    }
+
+    public List<Game> getAllBeforeDate(DateTime end, int teamid){
+        List<Game> allGames = getAll(teamid);
+        Iterator<Game> gameIterator = allGames.iterator();
+        while(gameIterator.hasNext()){
+            Game game = gameIterator.next();
+            if (!game.getDate().isBefore(end)) {
+                gameIterator.remove();
+            }
+        }
+        return addTeamInformation(allGames);
+    }
+
+    public List<Game> getAllAfterDate(DateTime start, int teamid){
+        List<Game> allGames = getAll(teamid);
+        Iterator<Game> gameIterator = allGames.iterator();
+        while(gameIterator.hasNext()){
+            Game game = gameIterator.next();
+            if (!game.getDate().isAfter(start)) {
+                gameIterator.remove();
+            }
+        }
+        return addTeamInformation(allGames);
+    }
+
+    public List<Game> getNextCertainAmountOfGames(int amount, int teamid){
+        List<Game> games = getAllAfterDate(DateTime.now(), teamid);
+        Collections.sort(games, new Game.DateComperator());
+        return games.size()>0?games.subList(0, amount>(games.size())?(games.size()):amount):new ArrayList<Game>();
+    }
+
+    public List<Game> getPreviousCertainAmountOfGames(int amount, int teamid){
+        List<Game> games = getAllBeforeDate(DateTime.now(), teamid);
+        Collections.sort(games, new Game.DateComperator());
+        return games.size()>0?games.subList(amount>(games.size()-1)?0:(games.size()-1)-amount, games.size()):new ArrayList<Game>();
+    }
+
+    protected Game addTeamInformation(Game game){
         game.setHomeTeam(teamRepository.get(game.getHomeTeam().getId()));
         game.setAwayTeam(teamRepository.get(game.getAwayTeam().getId()));
         return game;
     }
 
-    private List<Game> addTeamInformation(List<Game> games){
+    protected List<Game> addTeamInformation(List<Game> games){
         for(Game game: games){
             addTeamInformation(game);
         }

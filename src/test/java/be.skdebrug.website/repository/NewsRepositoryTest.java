@@ -2,6 +2,7 @@ package be.skdebrug.website.repository;
 
 import be.skdebrug.website.core.News;
 import be.skdebrug.website.endpoint.SQLiteConnection;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,9 +32,11 @@ public class NewsRepositoryTest {
         News newsBefore = new News();
         newsBefore.setTitle("Lovely Title");
         newsBefore.setContent("I love this content");
+        newsBefore.setDate(new DateTime());
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getDate()).isEqualTo(newsBefore.getDate());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
     }
@@ -41,12 +44,15 @@ public class NewsRepositoryTest {
     @Test
     public void testGetSpecificandDelete(){
         News newsBefore = new News();
+        newsBefore.setTitle("Lovely Title");
         newsBefore.setContent("I love this content");
+        newsBefore.setDate(new DateTime());
         newsRepository.create(newsBefore);
         newsBefore = newsRepository.getAll().get(0);
         int newsId = newsBefore.getId();
         News newsAfter = newsRepository.get(newsId);
         assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
+        assertThat(newsAfter.getDate()).isEqualTo(newsBefore.getDate());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
         newsRepository.delete(newsId);
@@ -56,11 +62,13 @@ public class NewsRepositoryTest {
     @Test
     public void testInsertWithSingleQuote(){
         News newsBefore = new News();
+        newsBefore.setDate(new DateTime());
         newsBefore.setTitle("De Bruyne en Casteels ' helden in Duitse Supercup");
         newsBefore.setContent("Wolfsburg z'on 30 miljoen euro");
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getDate()).isEqualTo(newsBefore.getDate());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
     }
@@ -68,21 +76,25 @@ public class NewsRepositoryTest {
     @Test
     public void testGetSpecificandUpdate(){
         News newsBefore = new News();
+        newsBefore.setDate(new DateTime());
         newsBefore.setTitle("I love this title");
         newsBefore.setContent("I love this content");
         newsRepository.create(newsBefore);
         News newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isNotNull();
+        assertThat(newsAfter.getDate()).isEqualTo(newsBefore.getDate());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
 
         newsBefore = newsRepository.getAll().get(0);
+        newsBefore.setDate(new DateTime());
         newsBefore.setTitle("new title");
         newsBefore.setContent("new content");
         newsRepository.update(newsBefore);
         assertThat(newsRepository.getAll().size()).isEqualTo(1);
         newsAfter = newsRepository.getAll().get(0);
         assertThat(newsAfter.getId()).isEqualTo(newsBefore.getId());
+        assertThat(newsAfter.getDate()).isEqualTo(newsBefore.getDate());
         assertThat(newsAfter.getTitle()).isEqualTo(newsBefore.getTitle());
         assertThat(newsAfter.getContent()).isEqualTo(newsBefore.getContent());
     }
@@ -90,6 +102,7 @@ public class NewsRepositoryTest {
     @Test
     public void testCreatetMultipleAndDeleteAll(){
         News newsBefore = new News();
+        newsBefore.setDate(new DateTime());
         newsBefore.setTitle("I love this title");
         newsBefore.setContent("I love this content");
         newsRepository.create(newsBefore);

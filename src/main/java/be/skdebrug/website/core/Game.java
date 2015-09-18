@@ -2,15 +2,17 @@ package be.skdebrug.website.core;
 
 import org.joda.time.DateTime;
 
+import java.util.Comparator;
+
 /**
  * Developer: Ben Oeyen
  * Date: 23/07/2015
  */
-public class Game {
+public class Game{
 
     private int id;
     private GameType gameType;
-    private DateTime dateStart;
+    private DateTime date;
     private Team homeTeam;
     private Team awayTeam;
     private Integer homeScore;
@@ -35,12 +37,12 @@ public class Game {
         this.gameType = gameType;
     }
 
-    public DateTime getDateStart() {
-        return dateStart;
+    public DateTime getDate() {
+        return date;
     }
 
-    public void setDateStart(DateTime dateStart) {
-        this.dateStart = dateStart;
+    public void setDate(DateTime date) {
+        this.date = date;
     }
 
     public Team getHomeTeam() {
@@ -75,5 +77,16 @@ public class Game {
         this.awayScore = awayScore;
     }
 
-
+    public static class DateComperator implements Comparator<Game> {
+        @Override
+        public int compare(Game o1, Game o2) {
+            if(o1.getDate().isBefore(o2.getDate())){
+                return -1;
+            }else if(o1.getDate().isAfter(o2.getDate())){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
 }

@@ -38,6 +38,22 @@ public class GameController {
         return gameService.getAll();
     }
 
+    @GET
+    @Timed
+    @Path("/next/{amount}/team/{teamid}")
+    public List<Game> getNext(@PathParam("amount") int amount, @PathParam("teamid") int teamid) {
+        LOG.debug("@GET /game/next/" + amount + "/team/" + teamid + " get next " + amount + " games for team " + teamid);
+        return gameService.getNextCertainAmountOfGames(amount, teamid);
+    }
+
+    @GET
+    @Timed
+    @Path("/prev/{amount}/team/{teamid}")
+    public List<Game> getPrev(@PathParam("amount") int amount, @PathParam("teamid") int teamid) {
+        LOG.debug("@GET /game/prev/"  + amount + "/team/" + teamid + " get prev " + amount + " games for team " + teamid);
+        return gameService.getPreviousCertainAmountOfGames(amount, teamid);
+    }
+
     @PUT
     @Timed
     public void update(Game game) {

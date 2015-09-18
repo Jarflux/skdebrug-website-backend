@@ -1,11 +1,8 @@
 package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.League;
-import be.skdebrug.website.core.Standing;
 import com.google.inject.Inject;
 import org.joda.time.DateTime;
-
-import java.util.List;
 
 /**
  * Developer: Ben Oeyen
@@ -23,7 +20,7 @@ public class LeagueService {
     public League get(int year){
         League league = new League();
         league.setYear(year);
-        league.calculateStandings(gameService.getAllLeagueBetweenDates(league.getStartDate(), league.getEndDate()));
+        league.calculateStandings(gameService.getAllBetweenDates(league.getStartDate(), league.getEndDate()));
         return league;
     }
 }

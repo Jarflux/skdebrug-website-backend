@@ -21,7 +21,7 @@ public class GameRepository extends AbstractRepository {
     private static final String TBL_GAME = "tbl_game";
     private static final String COL_GAME_ID = "gameID";
     private static final String COL_GAME_TYPE = "gametype";
-    private static final String COL_GAME_START = "start";
+    private static final String COL_GAME_DATE = "date";
     private static final String COL_GAME_HOME_TEAM = "homeTeam";
     private static final String COL_GAME_AWAY_TEAM = "awayTeam";
     private static final String COL_GAME_HOME_SCORE = "homeScore";
@@ -31,7 +31,7 @@ public class GameRepository extends AbstractRepository {
         Game game = new Game();
         game.setGameType(GameType.valueOf(queryResult.getString(COL_GAME_TYPE)));
         game.setId(queryResult.getInt(COL_GAME_ID));
-        game.setDateStart(new DateTime(queryResult.getLong(COL_GAME_START)));
+        game.setDate(new DateTime(queryResult.getLong(COL_GAME_DATE)));
         Team home = new Team();
         home.setId(queryResult.getInt(COL_GAME_HOME_TEAM));
         game.setHomeTeam(home);
@@ -58,7 +58,7 @@ public class GameRepository extends AbstractRepository {
             public Boolean defineOperation(Statement statement) throws SQLException {
                 statement.execute(log("CREATE TABLE IF NOT EXISTS " + TBL_GAME + " (" + COL_GAME_ID + " INTEGER PRIMARY KEY ASC,"
                         + COL_GAME_TYPE + ","
-                        + COL_GAME_START + ","
+                        + COL_GAME_DATE + ","
                         + COL_GAME_HOME_TEAM + ","
                         + COL_GAME_AWAY_TEAM + ","
                         + COL_GAME_HOME_SCORE + ","
@@ -75,14 +75,14 @@ public class GameRepository extends AbstractRepository {
             public Boolean defineOperation(Statement statement) throws SQLException {
                 statement.executeUpdate(log("INSERT INTO " + TBL_GAME + " ("
                         + COL_GAME_TYPE + ","
-                        + COL_GAME_START + ","
+                        + COL_GAME_DATE + ","
                         + COL_GAME_HOME_TEAM + ","
                         + COL_GAME_AWAY_TEAM + ","
                         + COL_GAME_HOME_SCORE + ","
                         + COL_GAME_AWAY_SCORE
                         + ") VALUES ('"
                         + game.getGameType() + "','"
-                        + game.getDateStart().getMillis() + "','"
+                        + game.getDate().getMillis() + "','"
                         + game.getHomeTeam().getId() + "','"
                         + game.getAwayTeam().getId() + "','"
                         + game.getHomeScore() + "','"
@@ -119,13 +119,27 @@ public class GameRepository extends AbstractRepository {
         }).runOperation();
     }
 
+    public List<Game> getAll(final int teamid) {
+        return (new SQLiteConnection<List<Game>>() {
+            @Override
+            public List<Game> defineOperation(Statement statement) throws SQLException {
+                List<Game> gameList = new ArrayList<>();
+                ResultSet queryResult = statement.executeQuery(log("SELECT * FROM " + TBL_GAME + " WHERE " + COL_GAME_HOME_TEAM + " = '" + teamid + "' OR " + COL_GAME_AWAY_TEAM + " = '" + teamid + "'" ));
+                while (queryResult.next()) {
+                    gameList.add(parseGameFromResult(queryResult));
+                }
+                return gameList;
+            }
+        }).runOperation();
+    }
+
     public boolean update(final Game game) {
         return (new SQLiteConnection<Boolean>() {
             @Override
             public Boolean defineOperation(Statement statement) throws SQLException {
                 statement.executeUpdate(log("UPDATE " + TBL_GAME
                         + " SET "
-                        + COL_GAME_START + " = '" + game.getDateStart().getMillis() + "', "
+                        + COL_GAME_DATE + " = '" + game.getDate().getMillis() + "', "
                         + COL_GAME_TYPE + " = '" + game.getGameType() + "', "
                         + COL_GAME_HOME_TEAM + " = '" + game.getHomeTeam().getId() + "', "
                         + COL_GAME_AWAY_TEAM + " = '" + game.getAwayTeam().getId() + "', "

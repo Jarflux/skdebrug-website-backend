@@ -72,6 +72,19 @@ public class TeamRepository extends AbstractRepository {
         }).runOperation();
     }
 
+    public Team get(final String teamName) {
+        return (new SQLiteConnection<Team>() {
+            @Override
+            public Team defineOperation(Statement statement) throws SQLException {
+                ResultSet queryResult = statement.executeQuery(log("SELECT * FROM " + TBL_TEAM + " WHERE " + COL_TEAM_NAME + " = '" + teamName + "'"));
+                if (queryResult.next()) {
+                    return parseTeamFromResult(queryResult);
+                }
+                return null;
+            }
+        }).runOperation();
+    }
+
     public List<Team> getAll() {
         return (new SQLiteConnection<List<Team>>() {
             @Override

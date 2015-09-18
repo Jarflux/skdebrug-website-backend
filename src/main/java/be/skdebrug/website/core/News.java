@@ -1,11 +1,14 @@
 package be.skdebrug.website.core;
 
+import org.joda.time.DateTime;
+
 /**
  * Developer: Ben Oeyen
  * Date: 23/07/2015
  */
 public class News {
     private int id;
+    private DateTime date;
     private String title;
     private String content;
 
@@ -31,5 +34,13 @@ public class News {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public DateTime getDate() {
+        return date;
+    }
+
+    public void setDate(DateTime date) {
+        this.date = date;
     }
 }
