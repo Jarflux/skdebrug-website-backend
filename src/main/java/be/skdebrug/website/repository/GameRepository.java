@@ -38,8 +38,8 @@ public class GameRepository extends AbstractRepository {
         Team away = new Team();
         away.setId(queryResult.getInt(COL_GAME_AWAY_TEAM));
         game.setAwayTeam(away);
-        game.setHomeScore(queryResult.getInt(COL_GAME_HOME_SCORE));
-        game.setAwayScore(queryResult.getInt(COL_GAME_AWAY_SCORE));
+        game.setHomeScore(queryResult.getObject(COL_GAME_HOME_SCORE) == null ? null : queryResult.getInt(COL_GAME_HOME_SCORE));
+        game.setAwayScore(queryResult.getObject(COL_GAME_AWAY_SCORE) == null? null :queryResult.getInt(COL_GAME_AWAY_SCORE));
         return game;
     }
 

@@ -15,8 +15,8 @@ public class Game{
     private DateTime date;
     private Team homeTeam;
     private Team awayTeam;
-    private Integer homeScore;
-    private Integer awayScore;
+    private Integer homeScore = null;
+    private Integer awayScore = null;
 
     public Game() {
     }

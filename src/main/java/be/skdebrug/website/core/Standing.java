@@ -85,7 +85,7 @@ public class Standing implements Comparable<Standing> {
         this.ties++;
     }
 
-    public void addGolasFor(int goalsFor) {
+    public void addGoalsFor(int goalsFor) {
         this.goalsFor += goalsFor;
     }
 
@@ -94,15 +94,17 @@ public class Standing implements Comparable<Standing> {
     }
 
     public void addStatisticsFromGame(Game game) {
-        if (this.getTeam().equals(game.getHomeTeam())) {
-            addNumbersBasedOnResult(game.getHomeScore(), game.getAwayScore());
-        } else {
-            addNumbersBasedOnResult(game.getAwayScore(), game.getHomeScore());
+        if (game.getHomeScore() != null && game.getAwayScore() != null) {
+            if (this.getTeam().equals(game.getHomeTeam())) {
+                addNumbersBasedOnResult(game.getHomeScore(), game.getAwayScore());
+            } else {
+                addNumbersBasedOnResult(game.getAwayScore(), game.getHomeScore());
+            }
         }
     }
 
     private void addNumbersBasedOnResult(int goalsFor, int goalsAgainst) {
-        addGolasFor(goalsFor);
+        addGoalsFor(goalsFor);
         addGoalsAgainst(goalsAgainst);
         if (goalsFor > goalsAgainst) {
             addWin();
