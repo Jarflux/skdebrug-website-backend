@@ -1,9 +1,12 @@
 package be.skdebrug.website.service;
 
+import be.skdebrug.website.controller.DevController;
+import be.skdebrug.website.controller.LeagueController;
 import be.skdebrug.website.core.Game;
 import be.skdebrug.website.core.League;
 import be.skdebrug.website.core.Standing;
 import be.skdebrug.website.core.Team;
+import be.skdebrug.website.endpoint.SQLiteConnection;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -27,13 +30,16 @@ public class LeagueServiceTest {
 
     private LeagueService leagueService;
 
+    private DevController devController;
+    private LeagueController leagueController;
+
     private Team teamA = new Team();
     private Team teamB = new Team();
     private Team teamC = new Team();
     private Team teamD = new Team();
 
     @Before
-    public void before(){
+    public void before() {
         Injector injector = Guice.createInjector();
         leagueService = new LeagueService();
         injector.injectMembers(leagueService);
@@ -52,7 +58,7 @@ public class LeagueServiceTest {
     }
 
     @Test
-    public void testLeagueCalculation() throws JsonProcessingException{
+    public void testLeagueCalculation() throws JsonProcessingException {
 
         League league = leagueService.get(2015);
         List<Standing> standings = league.getStandings();
@@ -102,7 +108,7 @@ public class LeagueServiceTest {
         assertThat(standings.get(3).getPoints()).isEqualTo(0);
     }
 
-    public Game createGame(Team homeTeam, Team awayTeam, int homeScore, int awayScore){
+    public Game createGame(Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
         Game game = new Game();
         game.setHomeTeam(homeTeam);
         game.setAwayTeam(awayTeam);
@@ -112,7 +118,19 @@ public class LeagueServiceTest {
     }
 
     @Test
-    public void testCurrentLeague(){
+    public void testCurrentLeague() {
         assertThat(leagueService.getCurrent().getStandings().size()).isEqualTo(4);
+    }
+
+    @Test
+    public void testRealLeague() {
+        SQLiteConnection.databaseLocation = "test.db";
+        Injector injector = Guice.createInjector();
+        devController = new DevController();
+        injector.injectMembers(devController);
+        devController.fill();
+        leagueController = new LeagueController();
+        injector.injectMembers(leagueController);
+        assertThat(leagueController.get().getStandings().size()).isEqualTo(12);
     }
 }

@@ -58,7 +58,7 @@ public class League {
 
     private Standing getStandingForTeam(Team team) {
         for(Standing standing: standings){
-            if(standing.getTeam().equals(team)){
+            if(standing.getTeam().getName().equals(team.getName())){
                 return standing;
             }
         }
