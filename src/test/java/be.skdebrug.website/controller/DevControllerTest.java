@@ -31,10 +31,10 @@ public class DevControllerTest {
     @Before
     public void before(){
         SQLiteConnection.databaseLocation = "test.db";
-        GameRepository.dropDatabaseOnInjection = true;
-        NewsRepository.dropDatabaseOnInjection = true;
-        PlayerRepository.dropDatabaseOnInjection = true;
-        TeamRepository.dropDatabaseOnInjection = true;
+        GameRepository.dropDatabaseOnInjection = false;
+        NewsRepository.dropDatabaseOnInjection = false;
+        PlayerRepository.dropDatabaseOnInjection = false;
+        TeamRepository.dropDatabaseOnInjection = false;
         Injector injector = Guice.createInjector();
         devController = new DevController();
         gameController = new GameController();
