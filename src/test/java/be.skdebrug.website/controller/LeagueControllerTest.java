@@ -1,5 +1,6 @@
 package be.skdebrug.website.controller;
 
+import be.skdebrug.website.core.Standing;
 import be.skdebrug.website.endpoint.SQLiteConnection;
 import be.skdebrug.website.repository.GameRepository;
 import be.skdebrug.website.repository.NewsRepository;
@@ -34,5 +35,8 @@ public class LeagueControllerTest {
         leagueController = new LeagueController();
         injector.injectMembers(leagueController);
         assertThat(leagueController.get().getStandings().size()).isEqualTo(12);
+        for(Standing standing: leagueController.get().getStandings()){
+            assertThat(standing.getPoints()).isEqualTo(0);
+        }
     }
 }

@@ -39,7 +39,7 @@ public class GameRepository extends AbstractRepository {
         away.setId(queryResult.getInt(COL_GAME_AWAY_TEAM));
         game.setAwayTeam(away);
         game.setHomeScore(queryResult.getObject(COL_GAME_HOME_SCORE) == null ? null : queryResult.getInt(COL_GAME_HOME_SCORE));
-        game.setAwayScore(queryResult.getObject(COL_GAME_AWAY_SCORE) == null? null :queryResult.getInt(COL_GAME_AWAY_SCORE));
+        game.setAwayScore(queryResult.getObject(COL_GAME_AWAY_SCORE) == null ? null :queryResult.getInt(COL_GAME_AWAY_SCORE));
         return game;
     }
 
@@ -84,9 +84,9 @@ public class GameRepository extends AbstractRepository {
                         + game.getGameType() + "','"
                         + game.getDate().getMillis() + "','"
                         + game.getHomeTeam().getId() + "','"
-                        + game.getAwayTeam().getId() + "','"
-                        + game.getHomeScore() + "','"
-                        + game.getAwayScore() + "');"));
+                        + game.getAwayTeam().getId() + "',"
+                        + game.getHomeScore() + ","
+                        + game.getAwayScore() + ");"));
                 return true;
             }
         }).runOperation();
@@ -143,8 +143,8 @@ public class GameRepository extends AbstractRepository {
                         + COL_GAME_TYPE + " = '" + game.getGameType() + "', "
                         + COL_GAME_HOME_TEAM + " = '" + game.getHomeTeam().getId() + "', "
                         + COL_GAME_AWAY_TEAM + " = '" + game.getAwayTeam().getId() + "', "
-                        + COL_GAME_HOME_SCORE + " = '" + game.getHomeScore() + "', "
-                        + COL_GAME_AWAY_SCORE + " = '" + game.getAwayScore() + "' "
+                        + COL_GAME_HOME_SCORE + " = " + game.getHomeScore() + ", "
+                        + COL_GAME_AWAY_SCORE + " = " + game.getAwayScore() + " "
                         + "WHERE " + COL_GAME_ID + " = '" + game.getId() + "' "));
                 return true;
             }

@@ -57,7 +57,7 @@ public class DevControllerTest {
         devController.fill();
         assertThat(gameController.getAll().size()).isEqualTo(132);
         assertThat(playerController.getAll().size()).isEqualTo(19);
-        assertThat(newsController.getAll().size()).isEqualTo(3);
+        assertThat(newsController.getAll().size()).isEqualTo(2);
         assertThat(teamController.getAll().size()).isEqualTo(12);
         devController.clear();
         assertThat(gameController.getAll().size()).isEqualTo(0);
