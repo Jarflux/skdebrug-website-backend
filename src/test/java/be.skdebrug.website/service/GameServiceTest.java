@@ -170,11 +170,10 @@ public class GameServiceTest {
         when(gameRepositoryMock.getAll(any(Integer.class))).thenReturn(games);
         gameService.gameRepository = gameRepositoryMock;
 
-        List<Game> prevGames = gameService.getPreviousCertainAmountOfGames(3, 1);
-        assertThat(prevGames.size()).isEqualTo(3);
-        assertThat(prevGames.get(0).getId()).isEqualTo(1);
+        List<Game> prevGames = gameService.getPreviousCertainAmountOfGames(2, 1);
+        assertThat(prevGames.size()).isEqualTo(2);
+        assertThat(prevGames.get(0).getId()).isEqualTo(3);
         assertThat(prevGames.get(1).getId()).isEqualTo(2);
-        assertThat(prevGames.get(2).getId()).isEqualTo(3);
     }
 
     private Game createMockGame(int id, DateTime dateTime){

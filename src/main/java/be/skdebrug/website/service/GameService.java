@@ -115,13 +115,18 @@ public class GameService {
     public List<Game> getNextCertainAmountOfGames(int amount, int teamid){
         List<Game> games = getAllAfterDate(DateTime.now(), teamid);
         Collections.sort(games, new Game.DateComperator());
-        return games.size()>0?games.subList(0, amount>(games.size())?(games.size()):amount):new ArrayList<Game>();
+        return games.size()>0?
+                games.subList(0, amount>(games.size())?(games.size()):amount)
+                :new ArrayList<Game>();
     }
 
     public List<Game> getPreviousCertainAmountOfGames(int amount, int teamid){
         List<Game> games = getAllBeforeDate(DateTime.now(), teamid);
         Collections.sort(games, new Game.DateComperator());
-        return games.size()>0?games.subList(amount>(games.size()-1)?0:(games.size()-1)-amount, games.size()):new ArrayList<Game>();
+        Collections.reverse(games);
+        return games.size()>0?
+                games.subList(0, amount>(games.size())?(games.size()):amount)
+                :new ArrayList<Game>();
     }
 
     protected Game addTeamInformation(Game game){
