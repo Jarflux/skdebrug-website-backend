@@ -14,7 +14,7 @@ public class LeagueService {
     protected GameService gameService;
 
     public League getCurrent() {
-        return get(DateTime.now().getYear());
+        return get(DateTime.now().getMonthOfYear() > 7?DateTime.now().getYear():DateTime.now().getYear()-1);
     }
 
     public League get(int year){

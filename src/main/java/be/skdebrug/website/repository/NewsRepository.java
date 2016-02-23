@@ -89,7 +89,7 @@ public class NewsRepository extends AbstractRepository {
             @Override
             public List<News> defineOperation(Statement statement) throws SQLException {
                 List<News> newsList = new ArrayList<>();
-                ResultSet queryResult = statement.executeQuery(log("SELECT * FROM " + TBL_NEWS));
+                ResultSet queryResult = statement.executeQuery(log("SELECT * FROM " + TBL_NEWS + " ORDER BY " + COL_NEWS_DATE + " DESC"));
                 while (queryResult.next()) {
                     newsList.add(parseNewsFromResult(queryResult));
                 }

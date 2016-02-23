@@ -100,6 +100,32 @@ public class NewsRepositoryTest {
     }
 
     @Test
+    public void testCreatetMultipleCheckCronologicalOrder(){
+        News newsBefore1 = new News();
+        newsBefore1.setDate(new DateTime());
+        newsBefore1.setTitle("First");
+        newsBefore1.setContent("First content");
+        newsRepository.create(newsBefore1);
+
+        News newsBefore2 = new News();
+        newsBefore2.setDate((new DateTime()).plusDays(1));
+        newsBefore2.setTitle("Second");
+        newsBefore2.setContent("Second content");
+        newsRepository.create(newsBefore2);
+        assertThat(newsRepository.getAll().size()).isEqualTo(2);
+
+        News newsAfter1 = newsRepository.getAll().get(0);
+        assertThat(newsAfter1.getDate()).isEqualTo(newsBefore2.getDate());
+        assertThat(newsAfter1.getTitle()).isEqualTo(newsBefore2.getTitle());
+        assertThat(newsAfter1.getContent()).isEqualTo(newsBefore2.getContent());
+
+        News newsAfter2 = newsRepository.getAll().get(1);
+        assertThat(newsAfter2.getDate()).isEqualTo(newsBefore1.getDate());
+        assertThat(newsAfter2.getTitle()).isEqualTo(newsBefore1.getTitle());
+        assertThat(newsAfter2.getContent()).isEqualTo(newsBefore1.getContent());
+    }
+
+    @Test
     public void testCreatetMultipleAndDeleteAll(){
         News newsBefore = new News();
         newsBefore.setDate(new DateTime());
