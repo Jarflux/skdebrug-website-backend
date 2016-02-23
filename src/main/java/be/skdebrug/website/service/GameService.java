@@ -54,20 +54,20 @@ public class GameService {
     public List<Game> getAllBetweenDates(DateTime start, DateTime end) {
         List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
-        while(gameIterator.hasNext()){
+        while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
             if (!game.getDate().isAfter(start)
                     || !game.getDate().isBefore(end)) {
-                        gameIterator.remove();
+                gameIterator.remove();
             }
         }
         return addTeamInformation(allGames);
     }
 
-    public List<Game> getAllBeforeDate(DateTime end){
+    public List<Game> getAllBeforeDate(DateTime end) {
         List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
-        while(gameIterator.hasNext()){
+        while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
             if (!game.getDate().isBefore(end)) {
                 gameIterator.remove();
@@ -76,10 +76,10 @@ public class GameService {
         return addTeamInformation(allGames);
     }
 
-    public List<Game> getAllAfterDate(DateTime start){
+    public List<Game> getAllAfterDate(DateTime start) {
         List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
-        while(gameIterator.hasNext()){
+        while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
             if (!game.getDate().isAfter(start)) {
                 gameIterator.remove();
@@ -88,10 +88,10 @@ public class GameService {
         return addTeamInformation(allGames);
     }
 
-    public List<Game> getAllBeforeDate(DateTime end, int teamid){
+    public List<Game> getAllBeforeDate(DateTime end, int teamid) {
         List<Game> allGames = getAll(teamid);
         Iterator<Game> gameIterator = allGames.iterator();
-        while(gameIterator.hasNext()){
+        while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
             if (!game.getDate().isBefore(end)) {
                 gameIterator.remove();
@@ -100,10 +100,10 @@ public class GameService {
         return addTeamInformation(allGames);
     }
 
-    public List<Game> getAllAfterDate(DateTime start, int teamid){
+    public List<Game> getAllAfterDate(DateTime start, int teamid) {
         List<Game> allGames = getAll(teamid);
         Iterator<Game> gameIterator = allGames.iterator();
-        while(gameIterator.hasNext()){
+        while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
             if (!game.getDate().isAfter(start)) {
                 gameIterator.remove();
@@ -112,32 +112,34 @@ public class GameService {
         return addTeamInformation(allGames);
     }
 
-    public List<Game> getNextCertainAmountOfGames(int amount, int teamid){
+    public List<Game> getNextCertainAmountOfGames(int amount, int teamid) {
         List<Game> games = getAllAfterDate(DateTime.now(), teamid);
         Collections.sort(games, new Game.DateComperator());
-        return games.size()>0?
-                games.subList(0, amount>(games.size())?(games.size()):amount)
-                :new ArrayList<Game>();
+        return games.size() > 0 ?
+                games.subList(0, amount > (games.size()) ? (games.size()) : amount)
+                : new ArrayList<Game>();
     }
 
-    public List<Game> getPreviousCertainAmountOfGames(int amount, int teamid){
+    public List<Game> getPreviousCertainAmountOfGames(int amount, int teamid) {
         List<Game> games = getAllBeforeDate(DateTime.now(), teamid);
         Collections.sort(games, new Game.DateComperator());
         Collections.reverse(games);
-        return games.size()>0?
-                games.subList(0, amount>(games.size())?(games.size()):amount)
-                :new ArrayList<Game>();
+        return games.size() > 0 ?
+                games.subList(0, amount > (games.size()) ? (games.size()) : amount)
+                : new ArrayList<Game>();
     }
 
-    protected Game addTeamInformation(Game game){
+    protected Game addTeamInformation(Game game) {
         game.setHomeTeam(teamRepository.get(game.getHomeTeam().getId()));
         game.setAwayTeam(teamRepository.get(game.getAwayTeam().getId()));
         return game;
     }
 
-    protected List<Game> addTeamInformation(List<Game> games){
-        for(Game game: games){
-            addTeamInformation(game);
+    protected List<Game> addTeamInformation(List<Game> games) {
+        if (games != null && !games.isEmpty()) {
+            for (Game game : games) {
+                addTeamInformation(game);
+            }
         }
         return games;
     }
