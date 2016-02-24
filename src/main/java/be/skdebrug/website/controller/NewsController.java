@@ -41,7 +41,7 @@ public class NewsController {
     @Timed
     public void update(News news) {
         LOG.debug("@PUT /news create news");
-        newsService.create(news);
+        newsService.update(news);
     }
 
     @POST

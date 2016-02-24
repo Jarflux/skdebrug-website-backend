@@ -41,7 +41,7 @@ import java.util.List;
         @Timed
         public void update(Player player) {
             LOG.debug("@PUT /player create player");
-            playerService.create(player);
+            playerService.update(player);
         }
 
         @POST

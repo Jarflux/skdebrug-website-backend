@@ -42,7 +42,7 @@ public class TeamController {
     @Timed
     public void update(Team team) {
         LOG.debug("@PUT /team create team");
-        teamService.create(team);
+        teamService.update(team);
     }
 
     @POST

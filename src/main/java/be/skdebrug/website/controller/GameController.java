@@ -58,7 +58,7 @@ public class GameController {
     @Timed
     public void update(Game game) {
         LOG.debug("@PUT /game/" + game.getId() + " update game");
-        gameService.create(game);
+        gameService.update(game);
     }
 
     @POST
