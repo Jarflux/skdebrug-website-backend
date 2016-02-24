@@ -1,5 +1,6 @@
 package be.skdebrug.website.controller;
 
+import be.skdebrug.website.core.League;
 import be.skdebrug.website.endpoint.SQLiteConnection;
 import be.skdebrug.website.repository.GameRepository;
 import be.skdebrug.website.repository.NewsRepository;
@@ -27,6 +28,7 @@ public class DevControllerTest {
     private NewsController newsController;
     private TeamController teamController;
     private PlayerController playerController;
+    private LeagueController leagueController;
 
     @Before
     public void before(){
@@ -41,11 +43,13 @@ public class DevControllerTest {
         newsController = new NewsController();
         teamController = new TeamController();
         playerController = new PlayerController();
+        leagueController = new LeagueController();
         injector.injectMembers(devController);
         injector.injectMembers(gameController);
         injector.injectMembers(newsController);
         injector.injectMembers(teamController);
         injector.injectMembers(playerController);
+        injector.injectMembers(leagueController);
     }
 
     @Test
@@ -59,6 +63,7 @@ public class DevControllerTest {
         assertThat(playerController.getAll().size()).isEqualTo(20);
         assertThat(newsController.getAll().size()).isEqualTo(2);
         assertThat(teamController.getAll().size()).isEqualTo(12);
+
         devController.clear();
         assertThat(gameController.getAll().size()).isEqualTo(0);
         assertThat(playerController.getAll().size()).isEqualTo(0);

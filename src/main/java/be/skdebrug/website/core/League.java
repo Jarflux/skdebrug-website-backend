@@ -17,10 +17,10 @@ public class League {
     private List<Standing> standings = new ArrayList<>();
 
     public void setYear(int year) {
-        if(year > 1900 && year < 2100 ) {
+        if (year > 1900 && year < 2100) {
             this.year = year;
-            startDate = new DateTime().withDate(year,8,1);
-            endDate = new DateTime().withDate(year+1,7,1);
+            startDate = new DateTime().withDate(year, 8, 1);
+            endDate = new DateTime().withDate(year + 1, 7, 1);
         }
     }
 
@@ -36,19 +36,21 @@ public class League {
         return endDate;
     }
 
-    public void add(Standing standing){
+    public void add(Standing standing) {
         standings.add(standing);
     }
 
-    public void sort(){
+    public void sort() {
         Collections.sort(standings);
     }
 
     public void calculateStandings(List<Game> games) {
-        for(Game game: games){
-            addGameResultToStandings(game);
+        if (games != null && !games.isEmpty()) {
+            for (Game game : games) {
+                addGameResultToStandings(game);
+            }
+            sort();
         }
-        sort();
     }
 
     private void addGameResultToStandings(Game game) {
@@ -57,8 +59,8 @@ public class League {
     }
 
     private Standing getStandingForTeam(Team team) {
-        for(Standing standing: standings){
-            if(standing.getTeam().getName().equals(team.getName())){
+        for (Standing standing : standings) {
+            if (standing.getTeam().getName().equals(team.getName())) {
                 return standing;
             }
         }
