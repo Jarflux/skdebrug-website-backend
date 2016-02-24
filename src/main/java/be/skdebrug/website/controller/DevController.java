@@ -127,17 +127,6 @@ public class DevController {
         gameService.create(game);
     }
 
-    private void fillGameWithScore(DateTime dateTime, Team homeTeam, Team awayTeam, int homeScore, int awayScore) {
-        Game game = new Game();
-        game.setGameType(GameType.LEAGUE);
-        game.setDate(dateTime);
-        game.setHomeTeam(homeTeam);
-        game.setAwayTeam(awayTeam);
-        game.setHomeScore(homeScore);
-        game.setAwayScore(awayScore);
-        gameService.create(game);
-    }
-
     private void fillGamesAndTeams(){
         Team SKDeBrug = fillTeam("SK De Brug");
         Team DeurneseTurners = fillTeam("Deurnese Turners B");
@@ -292,7 +281,7 @@ public class DevController {
         fillGame(new DateTime(2016,2,20,13,0), PSK, DeurneseTurners);
         fillGame(new DateTime(2016,2,20,15,30), Amber, TCBrabo);
         fillGame(new DateTime(2016,2,20,15,0), ACDeHeide, KFCBrabo);
-        fillGameWithScore(new DateTime(2016,2,20,15,30), Houtbeurs, SKDeBrug, 1, 3);
+        fillGame(new DateTime(2016,2,20,15,30), Houtbeurs, SKDeBrug);
         fillGame(new DateTime(2016,2,20,14,30), Vidam, Umicore);
         fillGame(new DateTime(2016,2,20,13,0), Toreke, NonkelJan);
 
