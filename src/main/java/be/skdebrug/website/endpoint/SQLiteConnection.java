@@ -15,7 +15,7 @@ import java.sql.Statement;
 public abstract class SQLiteConnection<RESULT> {
 
     private final static Logger LOG = Logger.getLogger(SQLiteConnection.class);
-    public static String databaseLocation = "skdebrug.db";
+    public static String databaseLocation = "/opt/website/skdebrug.db";
 
     static {
         try {
