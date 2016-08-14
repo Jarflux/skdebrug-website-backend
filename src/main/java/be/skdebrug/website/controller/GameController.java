@@ -1,6 +1,7 @@
 package be.skdebrug.website.controller;
 
 import be.skdebrug.website.core.Game;
+import be.skdebrug.website.core.GameType;
 import be.skdebrug.website.service.GameService;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -36,6 +37,14 @@ public class GameController {
     public List<Game> getAll() {
         LOG.debug("@GET /game get all games");
         return gameService.getAll();
+    }
+
+    @GET
+    @Timed
+    @Path("/type")
+    public GameType[] getAllTypes() {
+        LOG.debug("@GET /game/type get all gametypes");
+        return GameType.values();
     }
 
     @GET
