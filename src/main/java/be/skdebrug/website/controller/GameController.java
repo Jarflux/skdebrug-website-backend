@@ -15,7 +15,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-@Path("/game")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class GameController {
 
@@ -26,7 +26,7 @@ public class GameController {
 
     @GET
     @Timed
-    @Path("/{gameId}")
+    @Path("game/{gameId}")
     public Game get(@PathParam("gameId") int gameId) {
         LOG.debug("@GET /game/" + gameId + " get game with id " + gameId);
         return gameService.get(gameId);
@@ -34,6 +34,7 @@ public class GameController {
 
     @GET
     @Timed
+    @Path("game")
     public List<Game> getAll() {
         LOG.debug("@GET /game get all games");
         return gameService.getAll();
@@ -41,7 +42,7 @@ public class GameController {
 
     @GET
     @Timed
-    @Path("/type")
+    @Path("private/game")
     public GameType[] getAllTypes() {
         LOG.debug("@GET /game/type get all gametypes");
         return GameType.values();
@@ -49,7 +50,7 @@ public class GameController {
 
     @GET
     @Timed
-    @Path("/next/{amount}/team/{teamid}")
+    @Path("game/next/{amount}/team/{teamid}")
     public List<Game> getNext(@PathParam("amount") int amount, @PathParam("teamid") int teamid) {
         LOG.debug("@GET /game/next/" + amount + "/team/" + teamid + " get next " + amount + " games for team " + teamid);
         return gameService.getNextCertainAmountOfGames(amount, teamid);
@@ -57,7 +58,7 @@ public class GameController {
 
     @GET
     @Timed
-    @Path("/prev/{amount}/team/{teamid}")
+    @Path("game/prev/{amount}/team/{teamid}")
     public List<Game> getPrev(@PathParam("amount") int amount, @PathParam("teamid") int teamid) {
         LOG.debug("@GET /game/prev/"  + amount + "/team/" + teamid + " get prev " + amount + " games for team " + teamid);
         return gameService.getPreviousCertainAmountOfGames(amount, teamid);
@@ -65,6 +66,7 @@ public class GameController {
 
     @PUT
     @Timed
+    @Path("private/game")
     public void update(Game game) {
         LOG.debug("@PUT /game/" + game.getId() + " update game");
         gameService.update(game);
@@ -72,6 +74,7 @@ public class GameController {
 
     @POST
     @Timed
+    @Path("private/game")
     public void create(Game game) {
         LOG.debug("@POST /game create game");
         gameService.create(game);
@@ -79,7 +82,7 @@ public class GameController {
 
     @DELETE
     @Timed
-    @Path("/{gameId}")
+    @Path("private/game/{gameId}")
     public void delete(@PathParam("gameId") int gameId) {
         LOG.debug("@DELETE /game/" + gameId + " delete game with id " + gameId);
         gameService.delete(gameId);
@@ -87,6 +90,7 @@ public class GameController {
 
     @DELETE
     @Timed
+    @Path("private/game")
     public void deleteAll() {
         LOG.debug("@DELETE /game/ delete all games");
         gameService.deleteAll();

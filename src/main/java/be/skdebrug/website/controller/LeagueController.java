@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-@Path("/league")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class LeagueController {
 
@@ -26,6 +26,7 @@ public class LeagueController {
 
     @GET
     @Timed
+    @Path("league/")
     public League get() {
         LOG.debug("@GET /league/ get current league");
         return leagueService.getCurrent();

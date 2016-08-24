@@ -15,6 +15,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 07/08/15
  */
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class PlayerController {
     private final static Logger LOG = Logger.getLogger(PlayerController.class);
@@ -24,7 +25,7 @@ public class PlayerController {
 
     @GET
     @Timed
-    @Path("/player/{playerId}")
+    @Path("player/{playerId}")
     public Player get(@PathParam("playerId") int playerId) {
         LOG.debug("@GET /player/" + playerId + " get player with id " + playerId);
         return playerService.get(playerId);
@@ -32,7 +33,7 @@ public class PlayerController {
 
     @GET
     @Timed
-    @Path("/player")
+    @Path("player")
     public List<Player> getAll() {
         LOG.debug("@GET /player get all players");
         return playerService.getAll();
@@ -40,7 +41,7 @@ public class PlayerController {
 
     @GET
     @Timed
-    @Path("/player/type")
+    @Path("player/type")
     public PlayerType[] getAllTypes() {
         LOG.debug("@GET /player/type get all playertypes");
         return PlayerType.values();
@@ -48,7 +49,7 @@ public class PlayerController {
 
     @PUT
     @Timed
-    @Path("/player")
+    @Path("private/player")
     public void update(Player player) {
         LOG.debug("@PUT /player create player");
         playerService.update(player);
@@ -56,7 +57,7 @@ public class PlayerController {
 
     @POST
     @Timed
-    @Path("/player")
+    @Path("private/player")
     public void create(Player player) {
         LOG.debug("@POST /player update player");
         playerService.create(player);
@@ -64,7 +65,7 @@ public class PlayerController {
 
     @DELETE
     @Timed
-    @Path("/player/{playerId}")
+    @Path("private/player/{playerId}")
     public void delete(@PathParam("playerId") int playerId) {
         LOG.debug("@DELETE /player/" + playerId + " get player with id " + playerId);
         playerService.delete(playerId);
@@ -72,17 +73,9 @@ public class PlayerController {
 
     @DELETE
     @Timed
-    @Path("/player")
+    @Path("private/player")
     public void deleteAll() {
         LOG.debug("@DELETE /player/ delete all player");
-        playerService.deleteAll();
-    }
-
-    @DELETE
-    @Timed
-    @Path("/private/player")
-    public void deleteAllPrivate() {
-        LOG.debug("@DELETE /private/player/ delete all player");
         playerService.deleteAll();
     }
 

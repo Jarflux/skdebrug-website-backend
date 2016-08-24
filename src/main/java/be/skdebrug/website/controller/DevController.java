@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-@Path("/dev")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class DevController {
 
@@ -36,9 +36,9 @@ public class DevController {
 
     @GET
     @Timed
-    @Path("/clear")
+    @Path("private/clear")
     public boolean clear() {
-        LOG.debug("@GET /dev/clear delete all information from the database");
+        LOG.debug("@GET /private/clear delete all information from the database");
         newsService.deleteAll();
         gameService.deleteAll();
         teamService.deleteAll();
@@ -48,9 +48,9 @@ public class DevController {
 
     @GET
     @Timed
-    @Path("/fill")
+    @Path("private/fill")
     public boolean fill() {
-        LOG.debug("@GET /dev/fill");
+        LOG.debug("@GET /private/fill");
         newsService.deleteAll();
         gameService.deleteAll();
         teamService.deleteAll();

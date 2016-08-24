@@ -14,7 +14,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 23/07/15
  */
-@Path("/team")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class TeamController {
 
@@ -25,7 +25,7 @@ public class TeamController {
 
     @GET
     @Timed
-    @Path("/{teamId}")
+    @Path("team/{teamId}")
     public Team get(@PathParam("teamId") int teamId) {
         LOG.debug("@GET /team/" + teamId + " get team with id " + teamId);
         return teamService.get(teamId);
@@ -33,6 +33,7 @@ public class TeamController {
 
     @GET
     @Timed
+    @Path("team")
     public List<Team> getAll() {
         LOG.debug("@GET /team get all teams");
         return teamService.getAll();
@@ -40,6 +41,7 @@ public class TeamController {
 
     @PUT
     @Timed
+    @Path("private/team")
     public void update(Team team) {
         LOG.debug("@PUT /team create team");
         teamService.update(team);
@@ -47,6 +49,7 @@ public class TeamController {
 
     @POST
     @Timed
+    @Path("private/team")
     public void create(Team team) {
         LOG.debug("@POST /team update team");
         teamService.create(team);
@@ -54,7 +57,7 @@ public class TeamController {
 
     @DELETE
     @Timed
-    @Path("/{teamId}")
+    @Path("private/team/{teamId}")
     public void delete(@PathParam("teamId") int teamId) {
         LOG.debug("@DELETE /team/" + teamId + " get team with id " + teamId);
         teamService.delete(teamId);
@@ -62,6 +65,7 @@ public class TeamController {
 
     @DELETE
     @Timed
+    @Path("private/team")
     public void deleteAll() {
         LOG.debug("@DELETE /team/ delete all teams");
         teamService.deleteAll();

@@ -14,7 +14,7 @@ import java.util.List;
  * Developer: Ben Oeyen
  * Date: 24/05/2015
  */
-@Path("/news")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
 public class NewsController {
     private final static Logger LOG = Logger.getLogger(NewsController.class);
@@ -24,7 +24,7 @@ public class NewsController {
 
     @GET
     @Timed
-    @Path("/{newsId}")
+    @Path("news/{newsId}")
     public News get(@PathParam("newsId") int newsId) {
         LOG.debug("@GET /news/" + newsId + " get news with id " + newsId);
         return newsService.get(newsId);
@@ -32,6 +32,7 @@ public class NewsController {
 
     @GET
     @Timed
+    @Path("news")
     public List<News> getAll() {
         LOG.debug("@GET /news get all news");
         return newsService.getAll();
@@ -39,6 +40,7 @@ public class NewsController {
 
     @PUT
     @Timed
+    @Path("private/news")
     public void update(News news) {
         LOG.debug("@PUT /news create news");
         newsService.update(news);
@@ -46,6 +48,7 @@ public class NewsController {
 
     @POST
     @Timed
+    @Path("private/news")
     public void create(News news) {
         LOG.debug("@POST /news update news");
         newsService.create(news);
@@ -53,7 +56,7 @@ public class NewsController {
 
     @DELETE
     @Timed
-    @Path("/{newsId}")
+    @Path("private/news/{newsId}")
     public void delete(@PathParam("newsId") int newsId) {
         LOG.debug("@DELETE /news/" + newsId + " get news with id " + newsId);
         newsService.delete(newsId);
@@ -61,6 +64,7 @@ public class NewsController {
 
     @DELETE
     @Timed
+    @Path("private/news")
     public void deleteAll() {
         LOG.debug("@DELETE /news/ delete all news");
         newsService.deleteAll();
