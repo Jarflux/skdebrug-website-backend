@@ -42,7 +42,7 @@ public class GameController {
 
     @GET
     @Timed
-    @Path("private/game")
+    @Path("game/type")
     public GameType[] getAllTypes() {
         LOG.debug("@GET /game/type get all gametypes");
         return GameType.values();
