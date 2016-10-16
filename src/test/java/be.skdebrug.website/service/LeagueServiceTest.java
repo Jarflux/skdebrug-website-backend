@@ -1,16 +1,9 @@
 package be.skdebrug.website.service;
 
-import be.skdebrug.website.controller.DevController;
-import be.skdebrug.website.controller.LeagueController;
 import be.skdebrug.website.core.Game;
 import be.skdebrug.website.core.League;
 import be.skdebrug.website.core.Standing;
 import be.skdebrug.website.core.Team;
-import be.skdebrug.website.endpoint.SQLiteConnection;
-import be.skdebrug.website.repository.GameRepository;
-import be.skdebrug.website.repository.NewsRepository;
-import be.skdebrug.website.repository.PlayerRepository;
-import be.skdebrug.website.repository.TeamRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -55,7 +48,7 @@ public class LeagueServiceTest {
         games.add(createGame(teamC, teamD, 2, 0));
         games.add(createGame(teamA, teamC, 3, 1));
         games.add(createGame(teamC, teamB, 4, 5));
-        when(gameService.getAllBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
+        when(gameService.getAllLeagueBetweenDates(any(DateTime.class), any(DateTime.class))).thenReturn(games);
     }
 
     @Test

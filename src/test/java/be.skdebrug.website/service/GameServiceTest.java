@@ -1,18 +1,15 @@
 package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.Game;
-import be.skdebrug.website.core.League;
+import be.skdebrug.website.core.GameType;
 import be.skdebrug.website.core.Team;
 import be.skdebrug.website.repository.GameRepository;
 import be.skdebrug.website.repository.TeamRepository;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +125,7 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testGetAllBetweenDates(){
+    public void getAllLeagueBetweenDates(){
         List<Game> games = new ArrayList<>();
         games.add(createMockGame(5, new DateTime().minusDays(21)));
         games.add(createMockGame(5, new DateTime().minusDays(14)));
@@ -140,7 +137,7 @@ public class GameServiceTest {
         GameRepository gameRepositoryMock = mock(GameRepository.class);
         when(gameRepositoryMock.getAll()).thenReturn(games);
         gameService.gameRepository = gameRepositoryMock;
-        assertThat(gameService.getAllBetweenDates(new DateTime().minusDays(8), new DateTime().plusDays(15)).size()).isEqualTo(4);
+        assertThat(gameService.getAllLeagueBetweenDates(new DateTime().minusDays(8), new DateTime().plusDays(15)).size()).isEqualTo(4);
     }
 
     @Test
@@ -178,6 +175,7 @@ public class GameServiceTest {
 
     private Game createMockGame(int id, DateTime dateTime){
         Game game = mock(Game.class);
+        when(game.getGameType()).thenReturn(GameType.LEAGUE);
         when(game.getId()).thenReturn(id);
         when(game.getDate()).thenReturn(dateTime);
         Team team = mock(Team.class);

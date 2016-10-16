@@ -1,6 +1,7 @@
 package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.Game;
+import be.skdebrug.website.core.GameType;
 import be.skdebrug.website.repository.GameRepository;
 import be.skdebrug.website.repository.TeamRepository;
 import com.google.inject.Inject;
@@ -51,13 +52,12 @@ public class GameService {
         return gameRepository.deleteAll();
     }
 
-    public List<Game> getAllBetweenDates(DateTime start, DateTime end) {
+    public List<Game> getAllLeagueBetweenDates(DateTime start, DateTime end) {
         List<Game> allGames = getAll();
         Iterator<Game> gameIterator = allGames.iterator();
         while (gameIterator.hasNext()) {
             Game game = gameIterator.next();
-            if (!game.getDate().isAfter(start)
-                    || !game.getDate().isBefore(end)) {
+            if (!game.getDate().isAfter(start) || !game.getDate().isBefore(end) || !GameType.LEAGUE.equals(game.getGameType())) {
                 gameIterator.remove();
             }
         }
