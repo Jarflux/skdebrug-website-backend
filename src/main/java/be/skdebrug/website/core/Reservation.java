@@ -88,8 +88,20 @@ public class Reservation {
         this.lookbrood = lookbrood;
     }
 
-    public double getTotal() {
+    private double getTotal() {
         return lookbrood * lookbroodPrice + pasta * pastaPrice + veggie * veggiePrice + child * childPrice + dessert * dessertPrice;
+    }
+
+    public String getBodyLightWeight() {
+        return "<html><body>" +
+                "<h2>Pasta Catenaccio Reservatie op naam " + name + "</h2>" +
+                "<ul><li>Lookbroodjes "  + lookbrood +  " x " + lookbroodPrice + " &euro; = " + lookbrood*lookbroodPrice + " &euro;</li>"+
+                "<li>Pasta "  + pasta +  " x " + pastaPrice + " &euro; = " + pasta*pastaPrice + " &euro;</li>"+
+                "<li>Veggie "  + veggie +  " x " + veggiePrice + " &euro; = " + veggie*veggiePrice + " &euro;</li>"+
+                "<li>Kinder "  + child +  " x " + childPrice + " &euro; = " + child*childPrice + " &euro;</li>"+
+                "<li>Dessert "  + dessert +  " x " + dessertPrice + " &euro; = " + dessert*dessertPrice + " &euro;</li></ul>"+
+                "<p> Totaal " + getTotal() + "&euro;</p>" +
+                "</body></html>";
     }
 
     public String getBody() {

@@ -24,9 +24,17 @@ public class ReservationController {
     @POST
     @Timed
     @Path("reservation")
-    public boolean create(Reservation reservation) {
+    public boolean light(Reservation reservation) {
         //LOG.debug("@POST /mail update player");
         return reservationService.send(reservation);
+    }
+
+    @POST
+    @Timed
+    @Path("reservation/light")
+    public boolean sendLight(Reservation reservation) {
+        //LOG.debug("@POST /mail update player");
+        return reservationService.sendLight(reservation);
     }
 
 }
