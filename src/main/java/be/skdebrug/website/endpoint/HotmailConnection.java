@@ -36,9 +36,9 @@ public class HotmailConnection {
 
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress("skdebrug@hotmail.com", "Sk De Brug"));
-            msg.addRecipient(Message.RecipientType.TO,
-                    new InternetAddress("ben.oeyen@gmail.com", "Ben Oeyen"));
-            msg.setSubject("Pasta hoofding");
+            msg.addRecipient(Message.RecipientType.BCC, new InternetAddress("skdebrug@hotmail.com", "SK De Brug"));
+            msg.addRecipient(Message.RecipientType.TO, new InternetAddress(reservation.getRecipient(), reservation.getName()));
+            msg.setSubject("Pasta Catenaccio reservatie op naam van " + reservation.getName());
 
             Multipart multipart = new MimeMultipart();
             BodyPart bodyPart = new MimeBodyPart();
