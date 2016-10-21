@@ -6,7 +6,7 @@
 
     <groupId>be.skdebrug.website</groupId>
     <artifactId>dropwizard</artifactId>
-    <version>1.13</version>
+    <version>1.14</version>
 
     <dependencies>
         <dependency>
