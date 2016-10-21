@@ -7,6 +7,9 @@ java -jar target/dropwizard-1.0.jar server dropwizard.yml
     GET     /private/clear (be.skdebrug.website.controller.DevController)
     GET     /private/fill (be.skdebrug.website.controller.DevController)
 
+    GET     /email (be.skdebrug.website.controller.ReservationController)
+    POST    /email (be.skdebrug.website.controller.ReservationController)
+
     GET     /league/ (be.skdebrug.website.controller.LeagueController)
 
     DELETE  /private/player (be.skdebrug.website.controller.PlayerController)

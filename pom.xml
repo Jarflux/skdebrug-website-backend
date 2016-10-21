@@ -6,7 +6,7 @@
 
     <groupId>be.skdebrug.website</groupId>
     <artifactId>dropwizard</artifactId>
-    <version>1.12</version>
+    <version>1.13</version>
 
     <dependencies>
         <dependency>
@@ -23,6 +23,11 @@
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.5.2</version>
         </dependency>
 
         <!-- TEST -->
