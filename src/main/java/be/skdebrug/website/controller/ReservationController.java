@@ -8,6 +8,8 @@ import org.apache.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
 
 /**
  * Developer: Ben Oeyen
@@ -24,17 +26,17 @@ public class ReservationController {
     @POST
     @Timed
     @Path("reservation")
-    public boolean light(Reservation reservation) {
+    public Response send(Reservation reservation) {
         //LOG.debug("@POST /mail update player");
-        return reservationService.send(reservation);
-    }
-
-    @POST
-    @Timed
-    @Path("reservation/light")
-    public boolean sendLight(Reservation reservation) {
-        //LOG.debug("@POST /mail update player");
-        return reservationService.sendLight(reservation);
+        List<String> errors = reservation.validate();
+        if(errors.isEmpty()){
+             if ( reservationService.send(reservation)){
+                 return Response.status(Response.Status.OK).build();
+             }else{
+                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+             }
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
     }
 
 }

@@ -1,5 +1,11 @@
 package be.skdebrug.website.core;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.validator.routines.EmailValidator;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Developer: Ben Oeyen
  * Date: 21/10/2016
@@ -90,6 +96,39 @@ public class Reservation {
 
     private double getTotal() {
         return lookbrood * lookbroodPrice + pasta * pastaPrice + veggie * veggiePrice + child * childPrice + dessert * dessertPrice;
+    }
+
+    public List<String> validate(){
+        List<String> errors = new ArrayList<>();
+        if(StringUtils.isBlank(name)){
+            errors.add("Naam moet ingevuld zijn");
+        }
+        if(StringUtils.isBlank(recipient)){
+            errors.add("Email moet ingevuld zijn");
+        }else{
+            if(!EmailValidator.getInstance().isValid(recipient)){
+                errors.add("Email is niet correct");
+            }
+        }
+        if(!("18u - 19u".equals(time) || "19u - 20u".equals(time) || "20u - 21u".equals(time))){
+            errors.add("Tijdstip moet gekozen zijn.");
+        }
+        if(lookbrood < 0){
+           errors.add("Lookbrood aantal moet groter of gelijk aan 0 zijn");
+        }
+        if(pasta < 0){
+            errors.add("Pasta aantal moet groter of gelijk aan 0 zijn");
+        }
+        if(veggie < 0){
+            errors.add("Veggie aantal moet groter of gelijk aan 0 zijn");
+        }
+        if(child < 0){
+            errors.add("Kinder aantal moet groter of gelijk aan 0 zijn");
+        }
+        if(dessert < 0) {
+            errors.add("Pasta aantal moet groter of gelijk aan 0 zijn");
+        }
+        return errors;
     }
 
     public String getBodyLightWeight() {

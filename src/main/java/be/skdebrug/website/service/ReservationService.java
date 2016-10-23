@@ -16,8 +16,4 @@ public class ReservationService {
     public boolean send(Reservation reservation) {
         return hotmailConnection.send(reservation);
     }
-
-    public boolean sendLight(Reservation reservation) {
-        return hotmailConnection.send(reservation);
-    }
 }

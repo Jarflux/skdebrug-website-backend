@@ -6,7 +6,7 @@
 
     <groupId>be.skdebrug.website</groupId>
     <artifactId>dropwizard</artifactId>
-    <version>1.17</version>
+    <version>1.19</version>
 
     <dependencies>
         <dependency>
@@ -28,6 +28,11 @@
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>1.4.0</version>
         </dependency>
 
         <!-- TEST -->
