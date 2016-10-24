@@ -101,32 +101,35 @@ public class Reservation {
     public List<String> validate(){
         List<String> errors = new ArrayList<>();
         if(StringUtils.isBlank(name)){
-            errors.add("Naam moet ingevuld zijn");
+            errors.add(" Naam moet ingevuld zijn");
         }
         if(StringUtils.isBlank(recipient)){
-            errors.add("Email moet ingevuld zijn");
+            errors.add(" Email moet ingevuld zijn");
         }else{
             if(!EmailValidator.getInstance().isValid(recipient)){
-                errors.add("Email is niet correct");
+                errors.add(" Email is niet correct");
             }
         }
         if(!("18u - 19u".equals(time) || "19u - 20u".equals(time) || "20u - 21u".equals(time))){
-            errors.add("Tijdstip moet gekozen zijn.");
+            errors.add(" Tijdstip moet gekozen zijn.");
         }
         if(lookbrood < 0){
-           errors.add("Lookbrood aantal moet groter of gelijk aan 0 zijn");
+           errors.add(" Lookbrood aantal moet groter of gelijk aan 0 zijn");
         }
         if(pasta < 0){
-            errors.add("Pasta aantal moet groter of gelijk aan 0 zijn");
+            errors.add(" Pasta aantal moet groter of gelijk aan 0 zijn");
         }
         if(veggie < 0){
-            errors.add("Veggie aantal moet groter of gelijk aan 0 zijn");
+            errors.add(" Veggie aantal moet groter of gelijk aan 0 zijn");
         }
         if(child < 0){
-            errors.add("Kinder aantal moet groter of gelijk aan 0 zijn");
+            errors.add(" Kinder aantal moet groter of gelijk aan 0 zijn");
         }
         if(dessert < 0) {
-            errors.add("Pasta aantal moet groter of gelijk aan 0 zijn");
+            errors.add(" Pasta aantal moet groter of gelijk aan 0 zijn");
+        }
+        if(getTotal() <= 0){
+            errors.add(" Totaal moet groter dan 0 zijn");
         }
         return errors;
     }
@@ -443,7 +446,7 @@ public class Reservation {
         sb.append("                                            <td style=\"padding: 0 0 10px 0;\">\n");
         sb.append("                                                <table cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\">\n");
         sb.append("                                                    <tr>\n");
-        sb.append("                                                        <td align=\"left\" style=\"font-family: Arial, sans-serif; color: #333333; font-size: 16px;\">Kinder Spaghetti Bolognese</td>\n");
+        sb.append("                                                        <td align=\"left\" style=\"font-family: Arial, sans-serif; color: #333333; font-size: 16px;\">Kinder Spaghetti</td>\n");
         sb.append("                                                    </tr>\n");
         sb.append("                                                </table>\n");
         sb.append("                                            </td>\n");
