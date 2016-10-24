@@ -19,8 +19,8 @@ public class HotmailConnection {
 
     private static final String PROTOCOL = "smtp";
     private static final String MAILHOST = "smtp.live.com";
-    private static final String USER = "skdebrug@hotmail.com";
-    private static final String PASSWORD = "1257voetbal";
+    private static final String USER = "pasta.debrug@hotmail.be";
+    private static final String PASSWORD = "#debrugkampioen";
     private static final int PORT = 587;
 
     public boolean send(Reservation reservation) {
@@ -35,9 +35,9 @@ public class HotmailConnection {
             transport.connect(MAILHOST, PORT, USER, PASSWORD);
 
             Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("skdebrug@hotmail.com", "Sk De Brug"));
-            msg.addRecipient(Message.RecipientType.BCC, new InternetAddress("skdebrug@hotmail.com", "SK De Brug"));
+            msg.setFrom(new InternetAddress(USER, "Pasta Sk De Brug"));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(reservation.getRecipient(), reservation.getName()));
+            msg.addRecipient(Message.RecipientType.CC, new InternetAddress(USER, "Pasta SK De Brug"));
             msg.setSubject("Pasta Catenaccio reservatie op naam van " + reservation.getName());
 
             Multipart multipart = new MimeMultipart();

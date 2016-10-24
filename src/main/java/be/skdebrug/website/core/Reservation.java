@@ -100,50 +100,38 @@ public class Reservation {
 
     public List<String> validate(){
         List<String> errors = new ArrayList<>();
-        if(StringUtils.isBlank(name)){
-            errors.add(" Naam moet ingevuld zijn");
-        }
         if(StringUtils.isBlank(recipient)){
-            errors.add(" Email moet ingevuld zijn");
+            errors.add("Email moet ingevuld zijn");
         }else{
             if(!EmailValidator.getInstance().isValid(recipient)){
-                errors.add(" Email is niet correct");
+                errors.add("Email is niet correct");
             }
         }
+        if(StringUtils.isBlank(name)){
+            errors.add("Naam moet ingevuld zijn");
+        }
         if(!("18u - 19u".equals(time) || "19u - 20u".equals(time) || "20u - 21u".equals(time))){
-            errors.add(" Tijdstip moet gekozen zijn.");
+            errors.add("Tijdstip moet gekozen zijn.");
         }
         if(lookbrood < 0){
-           errors.add(" Lookbrood aantal moet groter of gelijk aan 0 zijn");
+           errors.add("Lookbrood aantal moet groter of gelijk aan 0 zijn");
         }
         if(pasta < 0){
-            errors.add(" Pasta aantal moet groter of gelijk aan 0 zijn");
+            errors.add("Pasta aantal moet groter of gelijk aan 0 zijn");
         }
         if(veggie < 0){
-            errors.add(" Veggie aantal moet groter of gelijk aan 0 zijn");
+            errors.add("Veggie aantal moet groter of gelijk aan 0 zijn");
         }
         if(child < 0){
-            errors.add(" Kinder aantal moet groter of gelijk aan 0 zijn");
+            errors.add("Kinder aantal moet groter of gelijk aan 0 zijn");
         }
         if(dessert < 0) {
-            errors.add(" Pasta aantal moet groter of gelijk aan 0 zijn");
+            errors.add("Dessert aantal moet groter of gelijk aan 0 zijn");
         }
         if(getTotal() <= 0){
-            errors.add(" Totaal moet groter dan 0 zijn");
+            errors.add("Totaal moet groter dan 0 zijn");
         }
         return errors;
-    }
-
-    public String getBodyLightWeight() {
-        return "<html><body>" +
-                "<h2>Pasta Catenaccio Reservatie op naam " + name + "</h2>" +
-                "<ul><li>Lookbroodjes "  + lookbrood +  " x " + lookbroodPrice + " &euro; = " + lookbrood*lookbroodPrice + " &euro;</li>"+
-                "<li>Pasta "  + pasta +  " x " + pastaPrice + " &euro; = " + pasta*pastaPrice + " &euro;</li>"+
-                "<li>Veggie "  + veggie +  " x " + veggiePrice + " &euro; = " + veggie*veggiePrice + " &euro;</li>"+
-                "<li>Kinder "  + child +  " x " + childPrice + " &euro; = " + child*childPrice + " &euro;</li>"+
-                "<li>Dessert "  + dessert +  " x " + dessertPrice + " &euro; = " + dessert*dessertPrice + " &euro;</li></ul>"+
-                "<p> Totaal " + getTotal() + "&euro;</p>" +
-                "</body></html>";
     }
 
     public String getBody() {

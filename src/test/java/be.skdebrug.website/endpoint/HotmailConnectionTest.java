@@ -23,7 +23,7 @@ public class HotmailConnectionTest {
         reservation.setDessert(6);
         reservation.setTime("18u - 19u");
         reservation.setRecipient("ben.oeyen@gmail.com");
-        reservation.setName("Ben Oeyen");
+        reservation.setName("LOL ACCEPTATIE TEST");
         assertThat(connection.send(reservation)).isTrue();
     }
 
