@@ -143,7 +143,7 @@ public class DevController {
         Team Umicore = fillTeam("Umicore");
         Team ACDeHeide = fillTeam("AC De Heide");
 
-        int currentYear = DateTime.now().getYear();
+        int currentYear = DateTime.now().getMonthOfYear() > 7?DateTime.now().getYear():DateTime.now().getYear()-1;
 
         //Speeldag 1
         fillGame(new DateTime(currentYear, 9, 19, 15, 0), DeurneseTurners, KFCBrabo);

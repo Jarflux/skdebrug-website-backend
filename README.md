@@ -1,14 +1,14 @@
 # Dropwizard REST back-end for website.
 
 # Start server command
-java -jar target/dropwizard-1.0.jar server dropwizard.yml
+java -jar target/dropwizard-1.24.jar server dropwizard.yml
 
 # Rest API per domain
     GET     /private/clear (be.skdebrug.website.controller.DevController)
     GET     /private/fill (be.skdebrug.website.controller.DevController)
 
-    GET     /email (be.skdebrug.website.controller.ReservationController)
-    POST    /email (be.skdebrug.website.controller.ReservationController)
+    GET     /email (be.skdebrug.website.controller.EmailController)
+    POST    /email (be.skdebrug.website.controller.EmailController)
 
     GET     /league/ (be.skdebrug.website.controller.LeagueController)
 
@@ -44,5 +44,5 @@ java -jar target/dropwizard-1.0.jar server dropwizard.yml
     POST    /private/team (be.skdebrug.website.controller.TeamController)
     PUT     /private/team (be.skdebrug.website.controller.TeamController)
 
-
-
+    POST    /reservation (be.skdebrug.website.controller.EmailController)
+    POST    /registration (be.skdebrug.website.controller.EmailController)

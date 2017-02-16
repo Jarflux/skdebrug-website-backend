@@ -1,5 +1,6 @@
 package be.skdebrug.website.endpoint;
 
+import be.skdebrug.website.core.Registration;
 import be.skdebrug.website.core.Reservation;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,7 +14,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class HotmailConnectionTest {
 
     @Test @Ignore
-    public void testEmail(){
+    public void testPastaEmail(){
         HotmailConnection connection = new HotmailConnection();
         Reservation reservation = new Reservation();
         reservation.setLookbrood(4);
@@ -25,6 +26,16 @@ public class HotmailConnectionTest {
         reservation.setRecipient("ben.oeyen@gmail.com");
         reservation.setName("LOL ACCEPTATIE TEST");
         assertThat(connection.send(reservation)).isTrue();
+    }
+
+    @Test @Ignore
+    public void testQuizEmail(){
+        HotmailConnection connection = new HotmailConnection();
+        Registration registration = new Registration();
+        registration.setRecipient("ben.oeyen@gmail.com");
+        registration.setName("John Smith");
+        registration.setTeam("De Lustige Quizzers");
+        assertThat(connection.send(registration)).isTrue();
     }
 
 }

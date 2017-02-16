@@ -27,7 +27,7 @@ public class WebApp extends Application<Configuration> {
         //Dependency Injection
         Injector injector = Guice.createInjector();
         final NewsController newsController = injector.getInstance(NewsController.class);
-        final ReservationController reservationController = injector.getInstance(ReservationController.class);
+        final EmailController emailController = injector.getInstance(EmailController.class);
         final PlayerController playerController = injector.getInstance(PlayerController.class);
         final TeamController teamController = injector.getInstance(TeamController.class);
         final GameController gameController = injector.getInstance(GameController.class);
@@ -36,7 +36,7 @@ public class WebApp extends Application<Configuration> {
 
         //Register REST Controllers
         environment.jersey().register(newsController);
-        environment.jersey().register(reservationController);
+        environment.jersey().register(emailController);
         environment.jersey().register(playerController);
         environment.jersey().register(teamController);
         environment.jersey().register(gameController);
