@@ -33,7 +33,7 @@ public class HotmailConnectionTest {
         HotmailConnection connection = new HotmailConnection();
         Registration registration = new Registration();
         registration.setRecipient("ben.oeyen@gmail.com");
-        registration.setName("John Smith");
+        registration.setName("TEST MAIL");
         registration.setTeam("De Lustige Quizzers");
         assertThat(connection.send(registration)).isTrue();
     }

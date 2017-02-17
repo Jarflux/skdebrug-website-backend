@@ -24,6 +24,7 @@ public class HotmailConnection {
     private static final String MAILHOST = "smtp.live.com";
     private static final String PASTA_DOOR = StringUtils.reverse("eb.liamtoh@gurbed.atsap");
     private static final String QUIZ_DOOR = StringUtils.reverse("moc.liamtoh@gurbed.ziuq");
+    private static final String SKDEBRUG_TELENET = StringUtils.reverse("eb.tenelet@gurbedks");
     private static final String PASTA_KEY = StringUtils.reverse("neoipmakgurbed#");
     private static final String QUIZ_KEY = StringUtils.reverse("neoipmakgurbed#");
     private static final int PORT = 587;
@@ -75,7 +76,7 @@ public class HotmailConnection {
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(QUIZ_DOOR, "Quiz Sk De Brug"));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(registration.getRecipient(), registration.getName()));
-            msg.addRecipient(Message.RecipientType.CC, new InternetAddress(QUIZ_DOOR, "Quiz SK De Brug"));
+            msg.addRecipients(Message.RecipientType.CC, new InternetAddress[] { new InternetAddress(QUIZ_DOOR, "Quiz SK De Brug"), new InternetAddress(SKDEBRUG_TELENET, "SK De Brug")});
             msg.setSubject("Quiz inschrijving " + registration.getTeam());
 
             Multipart multipart = new MimeMultipart();
