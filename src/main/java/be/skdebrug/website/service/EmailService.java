@@ -2,7 +2,7 @@ package be.skdebrug.website.service;
 
 import be.skdebrug.website.core.Registration;
 import be.skdebrug.website.core.Reservation;
-import be.skdebrug.website.endpoint.HotmailConnection;
+import be.skdebrug.website.endpoint.VersioConnection;
 import com.google.inject.Inject;
 
 /**
@@ -12,13 +12,13 @@ import com.google.inject.Inject;
 public class EmailService {
 
     @Inject
-    protected HotmailConnection hotmailConnection;
+    protected VersioConnection connection;
 
     public boolean send(Reservation reservation) {
-        return hotmailConnection.send(reservation);
+        return connection.send(reservation);
     }
 
     public boolean send(Registration registration) {
-        return hotmailConnection.send(registration);
+        return connection.send(registration);
     }
 }

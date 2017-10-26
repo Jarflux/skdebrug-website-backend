@@ -2,37 +2,39 @@ package be.skdebrug.website.endpoint;
 
 import be.skdebrug.website.core.Registration;
 import be.skdebrug.website.core.Reservation;
-
-import javax.mail.*;
-import javax.mail.internet.*;
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
+
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 /**
  * Developer: Ben Oeyen
  * Date: 26/09/16
  */
-public class HotmailConnection {
+public class VersioConnection {
 
-    private final static Logger LOG = Logger.getLogger(HotmailConnection.class);
+    private final static Logger LOG = Logger.getLogger(VersioConnection.class);
 
     private static final String PROTOCOL = "smtp";
-    private static final String MAILHOST = "smtp.live.com";
-    private static final String PASTA_DOOR = StringUtils.reverse("eb.liamtoh@gurbed.atsap");
-    private static final String QUIZ_DOOR = StringUtils.reverse("moc.liamtoh@gurbed.ziuq");
-    private static final String SKDEBRUG_TELENET = StringUtils.reverse("eb.tenelet@gurbedks");
-    private static final String PASTA_KEY = StringUtils.reverse("neoipmakgurbed#");
-    private static final String QUIZ_KEY = StringUtils.reverse("neoipmakgurbed#");
+    private static final String MAILHOST = "mail.skdebrug.be";
+    private static final String PASTA_DOOR = StringUtils.reverse("eb.gurbedks@atsap");
+    private static final String QUIZ_DOOR = StringUtils.reverse("eb.gurbedks@ziuq");
+    private static final String PASTA_KEY = StringUtils.reverse("9791gurbeD");
+    private static final String QUIZ_KEY = StringUtils.reverse("9791gurbeD");
     private static final int PORT = 587;
 
     public boolean send(Reservation reservation) {
         Properties props = new Properties();
 
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.trust", "mail.skdebrug.be");
         Session session = Session.getDefaultInstance(props);
 
         try {
@@ -66,6 +68,7 @@ public class HotmailConnection {
         Properties props = new Properties();
 
         props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.ssl.trust", "mail.skdebrug.be");
         Session session = Session.getDefaultInstance(props);
 
         try {
@@ -76,7 +79,7 @@ public class HotmailConnection {
             Message msg = new MimeMessage(session);
             msg.setFrom(new InternetAddress(QUIZ_DOOR, "Quiz Sk De Brug"));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(registration.getRecipient(), registration.getName()));
-            msg.addRecipients(Message.RecipientType.CC, new InternetAddress[] { new InternetAddress(QUIZ_DOOR, "Quiz SK De Brug"), new InternetAddress(SKDEBRUG_TELENET, "SK De Brug")});
+            msg.addRecipient(Message.RecipientType.CC, new InternetAddress(QUIZ_DOOR, "Quiz SK De Brug"));
             msg.setSubject("Quiz inschrijving " + registration.getTeam());
 
             Multipart multipart = new MimeMultipart();

@@ -11,11 +11,11 @@ import static org.fest.assertions.Assertions.assertThat;
  * Developer: Ben Oeyen
  * Date: 22/10/2016
  */
-public class HotmailConnectionTest {
+public class MailConnectionTest {
 
     @Test @Ignore
-    public void testPastaEmail(){
-        HotmailConnection connection = new HotmailConnection();
+    public void testPastaVersioEmail(){
+        VersioConnection connection = new VersioConnection();
         Reservation reservation = new Reservation();
         reservation.setLookbrood(4);
         reservation.setPasta(3);
@@ -29,8 +29,8 @@ public class HotmailConnectionTest {
     }
 
     @Test @Ignore
-    public void testQuizEmail(){
-        HotmailConnection connection = new HotmailConnection();
+    public void testQuizVersioEmail(){
+        VersioConnection connection = new VersioConnection();
         Registration registration = new Registration();
         registration.setRecipient("ben.oeyen@gmail.com");
         registration.setName("TEST MAIL");
