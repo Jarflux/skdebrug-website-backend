@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class Registration {
 
+    private static final String QUIZ_DATUM = "17 Maart 2017";
+
     private String recipient;
     private String name;
     private String team;
@@ -208,7 +210,7 @@ public class Registration {
         sb.append("                                <td align=\"center\" style=\"font-size: 32px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0089d0; padding-top: 15px;\" class=\"padding-copy\">Quiz SK De Brug</td>\n");
         sb.append("                            </tr>\n");
         sb.append("                            <tr>\n");
-        sb.append("                                <td align=\"center\" style=\"font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; font-style: italic; color: #333333; padding-top: 15px;\" class=\"padding-copy\">17 Maart 2017 <br/>Zaal Ars, Boomsesteenweg 333, Wilrijk</td>\n");
+        sb.append("                                <td align=\"center\" style=\"font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; font-style: italic; color: #333333; padding-top: 15px;\" class=\"padding-copy\">" + QUIZ_DATUM + " <br/>Zaal Ars, Boomsesteenweg 333, Wilrijk</td>\n");
         sb.append("                            </tr>\n");
         sb.append("                            <tr>\n");
         sb.append("                                <td align=\"center\" style=\"font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; color: #333333; padding-top: 15px;\" class=\"padding-copy\">Bevestiging inschrijving ploeg " + team + "\n");

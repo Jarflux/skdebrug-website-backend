@@ -17,6 +17,7 @@ public class Reservation {
     private static final double childPrice = 5.0;
     private static final double dessertPrice = 3.5;
     private static final double lookbroodPrice = 2.5;
+    private static final String PASTA_DATUM = "9 december 2017";
 
     private String recipient;
     private String name;
@@ -281,7 +282,7 @@ public class Reservation {
         sb.append("                                <td align=\"center\" style=\"font-size: 32px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: #0089d0; padding-top: 15px;\" class=\"padding-copy\">Pasta Catenaccio</td>\n");
         sb.append("                            </tr>\n");
         sb.append("                            <tr>\n");
-        sb.append("                                <td align=\"center\" style=\"font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; font-style: italic; color: #333333; padding-top: 15px;\" class=\"padding-copy\">19 November 2016, " + time + "<br/>Zaal Ars, Boomsesteenweg 333, Wilrijk</td>\n");
+        sb.append("                                <td align=\"center\" style=\"font-size: 16px; line-height: 20px; font-family: Helvetica, Arial, sans-serif; font-style: italic; color: #333333; padding-top: 15px;\" class=\"padding-copy\">" + PASTA_DATUM + ", " + time + "<br/>Zaal Ars, Boomsesteenweg 333, Wilrijk</td>\n");
         sb.append("                            </tr>\n");
         sb.append("                        </table>\n");
         sb.append("                    </td>\n");
