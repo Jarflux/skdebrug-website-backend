@@ -17,7 +17,7 @@ public class Reservation {
     private static final double childPrice = 5.0;
     private static final double dessertPrice = 3.5;
     private static final double lookbroodPrice = 2.5;
-    private static final String PASTA_DATUM = "9 december 2017";
+    private static final String PASTA_DATUM = "15 december 2018";
 
     private String recipient;
     private String name;
