@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Registration {
 
-    private static final String QUIZ_DATUM = "16 Maart 2018";
+    private static final String QUIZ_DATUM = "15 Maart 2019";
 
     private String recipient;
     private String name;
